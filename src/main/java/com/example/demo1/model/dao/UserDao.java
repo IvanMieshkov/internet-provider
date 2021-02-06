@@ -1,5 +1,6 @@
 package com.example.demo1.model.dao;
 
+import com.example.demo1.model.entities.Tariff;
 import com.example.demo1.model.entities.User;
 
 import java.util.List;

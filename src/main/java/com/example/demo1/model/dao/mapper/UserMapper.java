@@ -1,9 +1,11 @@
 package com.example.demo1.model.dao.mapper;
 
+import com.example.demo1.model.entities.Tariff;
 import com.example.demo1.model.entities.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 /**

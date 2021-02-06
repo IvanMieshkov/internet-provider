@@ -1,10 +1,9 @@
 package com.example.demo1.controller.command;
 
 import com.example.demo1.model.dto.TariffDto;
-import com.example.demo1.model.services.impl.TariffsService;
+import com.example.demo1.model.services.impl.TariffsServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,6 +29,11 @@ public class Tariffs implements Command {
         String sortBy = req.getParameter(SORT_BY);
         String order = req.getParameter(ORDER);
 
+//        int tariff = Integer.parseInt(req.getParameter(SELECTED_TARIFF));
+//        String service = req.getParameter(TARIFF_SERVICE);
+//        User user = (User) req.getSession().getAttribute(USER_LOGGED);
+
+
         if(sortBy == null) {
             sortBy = "tariff_name_en";
         }
@@ -37,7 +41,8 @@ public class Tariffs implements Command {
             order = "ASC";
         }
 
-        List<TariffDto> tariffs = new TariffsService().getByService(service, language, sortBy, order);
+
+        List<TariffDto> tariffs = new TariffsServiceImpl().getByService(service, language, sortBy, order);
         req.setAttribute("tariffs", tariffs);
         req.setAttribute("service", service);
 

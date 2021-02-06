@@ -1,6 +1,8 @@
 package com.example.demo1.model.dao.impl;
 
+import com.example.demo1.controller.filter.AuthenticationFilter;
 import org.apache.commons.dbcp.BasicDataSource;
+import org.apache.log4j.Logger;
 
 import javax.sql.DataSource;
 
@@ -26,6 +28,7 @@ class ConnectionPoolHolder {
                     ds.setUsername(DATABASE_LOGIN);
                     ds.setPassword(DATABASE_PASSWORD);
                     ds.setMaxOpenPreparedStatements(100);
+                    ds.setMaxActive(100);
                     dataSource = ds;
                 }
             }

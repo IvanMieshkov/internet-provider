@@ -3,6 +3,7 @@ package com.example.demo1.model.dao.impl;
 import com.example.demo1.model.dao.TariffDao;
 import com.example.demo1.model.dao.mapper.TariffMapper;
 import com.example.demo1.model.entities.Tariff;
+import com.example.demo1.model.entities.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,7 +22,7 @@ import static com.example.demo1.containers.QueryContainer.*;
 public class JDBCTariffDao implements TariffDao {
     private Connection connection;
     private TariffMapper tariffMapper = new TariffMapper();
-    private Map<Integer, Tariff> tariffs = new HashMap<>();
+    private List<Tariff> tariffs = new ArrayList<>();
 
     JDBCTariffDao(Connection connection) {
         this.connection = connection;
@@ -74,19 +75,10 @@ public class JDBCTariffDao implements TariffDao {
      * Method for fetching all tariffs from the table
      * @return list of all tariffs in db
      */
-        @Override
+    @Override
     public List<Tariff> findAll() {
-            List<Tariff> tariffs = new ArrayList<>();
-
-            try(PreparedStatement statement = connection.prepareStatement(FIND_ALL_TARIFFS)){
-            ResultSet rs = statement.executeQuery();
-
-            while (rs.next()) {
-                Tariff tariff = tariffMapper.extractFromResultSet(rs);
-                tariffs.add(tariff);
-            }
-            rs.close();
-            return tariffs;
+        try(PreparedStatement statement = connection.prepareStatement(FIND_ALL_TARIFFS)){
+            return finder(statement);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -94,25 +86,30 @@ public class JDBCTariffDao implements TariffDao {
     }
 
     public List<Tariff> findByServiceSorted(String tariffService, String language, String sortBy, String order) {
-            List<Tariff> tariffs = new ArrayList<>();
-            String query = "SELECT * FROM tariff WHERE tariff_service = ? ORDER BY " + sortBy + " " + order + ";";
-            try (PreparedStatement statement = connection.prepareStatement(query)) {
+        String query = "SELECT * FROM tariff WHERE tariff_service = ? ORDER BY " + sortBy + " " + order + ";";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, tariffService);
-            ResultSet rs = statement.executeQuery();
+            return finder(statement);
 
-            while(rs.next()) {
-                Tariff tariff = tariffMapper.extractFromResultSet(rs);
-                tariffs.add(tariff);
-//                tariffMapper.makeUnique(tariffs, tariff);
-            }
-            rs.close();
-            return tariffs;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
     }
-        /**
+
+    @Override
+    public List<Tariff> findByUserId(Integer id) {
+        try (PreparedStatement statement = connection.prepareStatement(FIND_USER_TARIFFS)) {
+            statement.setInt(1, id);
+            return finder(statement);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
      * Method for updating tariffs
      * @param entity
      */
@@ -143,7 +140,7 @@ public class JDBCTariffDao implements TariffDao {
         }
     }
 
-        /**
+    /**
      * Method for closing connection to db
      */
     @Override
@@ -153,5 +150,16 @@ public class JDBCTariffDao implements TariffDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public List<Tariff> finder(PreparedStatement statement) throws SQLException {
+        ResultSet rs = statement.executeQuery();
+        List<Tariff> tariffs = new ArrayList<>();
+        while (rs.next()) {
+            Tariff tariff = tariffMapper.extractFromResultSet(rs);
+            tariffs.add(tariff);
+        }
+        rs.close();
+        return tariffs;
     }
 }

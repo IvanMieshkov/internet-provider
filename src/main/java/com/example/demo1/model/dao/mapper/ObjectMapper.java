@@ -1,5 +1,7 @@
 package com.example.demo1.model.dao.mapper;
 
+import com.example.demo1.model.entities.Service;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
@@ -16,5 +18,6 @@ public interface ObjectMapper<T> {
      */
     T extractFromResultSet(ResultSet rs) throws SQLException;
 
+    T makeUnique(Map<Integer, T> cache, T T);
 }
 

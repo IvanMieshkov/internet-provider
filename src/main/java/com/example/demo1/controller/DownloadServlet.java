@@ -2,7 +2,7 @@ package com.example.demo1.controller;
 
 import com.example.demo1.model.dto.TariffDto;
 import com.example.demo1.model.services.GeneratePdf;
-import com.example.demo1.model.services.impl.TariffsService;
+import com.example.demo1.model.services.impl.TariffsServiceImpl;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
@@ -41,7 +41,7 @@ public class DownloadServlet extends HttpServlet {
         response.addHeader("Content-Disposition", "inline; filename=" + "tariffs.pdf");
         ServletOutputStream out = response.getOutputStream();
 
-        List<TariffDto> tariffs = new TariffsService().getByService(service, language, sortBy, order);
+        List<TariffDto> tariffs = new TariffsServiceImpl().getByService(service, language, sortBy, order);
 
         ByteArrayOutputStream baos = GeneratePdf.getPdfFile(tariffs, language);
         baos.writeTo(out);

@@ -10,5 +10,5 @@ import java.util.List;
  */
 public interface TariffDao extends GenericDao<Tariff> {
     List<Tariff> findByServiceSorted(String tariffService, String language, String column, String order);
-
+    List<Tariff> findByUserId(Integer id);
 }

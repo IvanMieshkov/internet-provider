@@ -1,10 +1,8 @@
 package com.example.demo1.controller.command;
 
-import com.example.demo1.model.services.impl.ServicesService;
-import com.example.demo1.model.services.impl.TariffsService;
+import com.example.demo1.model.services.impl.ServicesServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import static com.example.demo1.containers.StringContainer.*;
 import static com.example.demo1.containers.StringContainer.USER_LOGGED_ROLE;
@@ -19,7 +17,7 @@ public class Services implements Command {
         String language = (String) req.getSession().getAttribute(LANGUAGE);
         String role = (String) req.getSession().getAttribute(USER_LOGGED_ROLE);
 
-        req.setAttribute("services", new ServicesService().getAllServices(language));
+        req.setAttribute("services", new ServicesServiceImpl().getAllServices(language));
 
         return "/WEB-INF/view/tariffs/" + role + "-services.jsp";
     }

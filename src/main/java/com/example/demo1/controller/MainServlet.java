@@ -22,20 +22,22 @@ public class MainServlet extends HttpServlet {
     private Map<String, Command> commands;
 
     @Override
-    public void init() throws ServletException {
+    public void init() {
         commands = new HashMap<>();
         commands.put("main-page", new MainPage());
         commands.put("login", new Login());
         commands.put("menu", new Menu());
         commands.put("tariffs", new Tariffs());
-        commands.put("services", new Services());
+        commands.put("payment", new Payment());
+//        commands.put("services", new Services());
         commands.put("clients", new ClientsList());
-//        commands.put("logout", new Logout()); //доделать начиная отсюда
+        commands.put("logout", new Logout());
 //        commands.put("change-password", new ChangePassword());
+        commands.put("choose-tariff", new TariffAcception());
 
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 
     }
 

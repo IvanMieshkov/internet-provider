@@ -64,7 +64,6 @@
     <tbody>
     <tr>
         <th>
-
             <fmt:message key="title.tariff.name"/>
             <a href="${pageContext.request.contextPath}/main/tariffs?service=${requestScope.service}&sortBy=${language == 'ukr' ? 'tariff_name_ukr' : 'tariff_name_en'}&order=ASC">&#8593</a>
             <a href="${pageContext.request.contextPath}/main/tariffs?service=${requestScope.service}&sortBy=${language == 'ukr' ? 'tariff_name_ukr' : 'tariff_name_en'}&order=DESC">&#8595</a>
@@ -78,6 +77,18 @@
     <tr>
         <td><c:out value="${tariff.name}"/></td>
         <td><c:out value="${tariff.tariff.tariffPrice}"/> <fmt:message key="currency"/> </td>
+        <td>
+            <form method="get" action="${pageContext.request.contextPath}/main/choose-tariff">
+                <input type="hidden" name="selectedTariff" value="${tariff.tariff.id}"/>
+                <input type="hidden" name="service" value="${tariff.tariff.tariffService}"/>
+                <p align="center">
+                    <button class="btn btn-success" style="background-color: deepskyblue" type="submit">
+                        <fmt:message key="button.choose"/>
+                    </button>
+                </p>
+            </form>
+            </p>
+        </td>
     </tr>
     </c:forEach>
     </tbody>

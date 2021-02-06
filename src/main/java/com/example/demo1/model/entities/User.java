@@ -1,5 +1,9 @@
 package com.example.demo1.model.entities;
 
+import com.example.demo1.model.dao.TariffDao;
+
+import java.util.List;
+
 /**
  * @author Ivan Mieshkov
  */
@@ -71,4 +75,5 @@ public class User {
     public Double getBalance() { return balance; }
 
     public void setBalance(Double balance) { this.balance = balance; }
+
 }

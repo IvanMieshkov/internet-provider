@@ -54,9 +54,9 @@
     <br>
     <form method="post" action="${pageContext.request.contextPath}/main/menu">
         <p align="center">
-            <input type="text" required placeholder=<fmt:message key="field.user.login"/> name="login"><br>
+            <input type="text" required placeholder="<fmt:message key="field.user.login"/>" name="login"><br>
 
-            <input type="password" required placeholder=<fmt:message key="field.user.password"/> name="password"><br>
+            <input type="password" required placeholder="<fmt:message key="field.user.password"/>" name="password"><br>
             <c:if test="${not empty requestScope.warning}">
                 <fmt:message key="${requestScope.warning}"/>
             </c:if><br>

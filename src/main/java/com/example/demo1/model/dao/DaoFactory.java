@@ -1,6 +1,7 @@
 package com.example.demo1.model.dao;
 
 import com.example.demo1.model.dao.impl.JDBCDaoFactory;
+import com.example.demo1.model.entities.UserTariff;
 
 /**
  * @author Ivan Mieshkov
@@ -11,6 +12,8 @@ public abstract class DaoFactory {
     public abstract UserDao createUserDao();
     public abstract TariffDao createTariffDao();
     public abstract ServiceDao createServiceDao();
+    public abstract UserTariffDao createUserTariffDao();
+
 //    public abstract AppointmentDao createAppointmentDao();
 //    public abstract ReviewDao createReviewDao();
 //    public abstract ClientAppointmentDao createClientAppointmentDao();

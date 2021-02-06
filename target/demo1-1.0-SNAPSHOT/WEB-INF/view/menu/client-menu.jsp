@@ -38,8 +38,6 @@
         <img src="https://i.ibb.co/nR7vNFX/pngwing-com.png" width="100" height="50" alt="logo"></a>
     <a href="${pageContext.request.contextPath}/main/menu" class="navbar-brand letter"
        style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.client.menu"/></a>
-<%--    <a href="${pageContext.request.contextPath}/main/internet" class="navbar-brand letter"--%>
-<%--       style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.internet"/></a>--%>
     <a href="${pageContext.request.contextPath}/main/tariffs?service=internet" class="navbar-brand letter"
        style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.internet"/></a>
     <a href="${pageContext.request.contextPath}/main/tariffs?service=tv" class="navbar-brand letter"
@@ -82,12 +80,36 @@
     </tr>
     <tr>
         <th scope="row"><fmt:message key="field.user.balance"/></th>
-            <c:choose>
-                <c:when test="${sessionScope.user.balance==0}">
-                    <td align="right" scope="row" style="color: red">${sessionScope.user.balance}</td>
-                </c:when>
-                <c:otherwise><td align="right">${sessionScope.user.balance}</td></c:otherwise>
-            </c:choose>
+        <c:choose>
+            <c:when test="${sessionScope.user.balance==0}">
+                <td align="right" scope="row" style="color: red">${sessionScope.user.balance}</td>
+            </c:when>
+            <c:otherwise><td align="right">${sessionScope.user.balance}</td></c:otherwise>
+        </c:choose>
+
+        <td>
+            <form method="get" action="${pageContext.request.contextPath}/main/payment">
+<%--                <p align="center">--%>
+                    <input type="text" name="payment" required placeholder="<fmt:message key="field.user.payment"/>"/>
+        <td>
+            <button class="btn btn-success" style="background-color: dodgerblue" type="submit"><fmt:message key="field.user.pay"/></button>
+        </td>
+        </p>
+        </form>
+        </td>
+
+    </tr>
+    <tr>
+        <th scope="row"><fmt:message key="field.user.tariffs"/></th>
+
+        <c:forEach var="userTariff" items="${sessionScope.userTariffs}">
+    <tr>
+        <c:if test="${userTariff.tariff.tariffService=='internet'}"><td align="right"><fmt:message key="navbar.internet"/></td></c:if>
+        <c:if test="${userTariff.tariff.tariffService=='tv'}"><td align="right"><fmt:message key="navbar.tv"/></td></c:if>
+        <c:if test="${userTariff.tariff.tariffService=='telephony'}"><td align="right"><fmt:message key="navbar.telephony"/></td></c:if>
+        <td align="right"><c:out value="${language == 'en' ? userTariff.tariff.tariffNameEn : userTariff.tariff.tariffNameUkr}"/></td>
+    </tr>
+    </c:forEach>
     </tr>
     </tbody>
 </table>

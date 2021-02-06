@@ -15,6 +15,7 @@
 <fmt:setBundle basename="localization"/>
 <html lang="${language}">
 <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
@@ -23,25 +24,28 @@
           crossorigin="anonymous">
 
     <title><fmt:message key="title.main.menu"/></title>
+    <style>
+        .table {
+            width: 40%;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light sticky-top justify-content-between"
      style="background-color: deepskyblue ">
     <a href="${pageContext.request.contextPath}/" class="navbar-brand">
         <img src="https://i.ibb.co/nR7vNFX/pngwing-com.png" width="100" height="50" alt="logo"></a>
-<%--    <a href="${pageContext.request.contextPath}/main/tariffs" class="navbar-brand letter"--%>
-<%--       style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.tariffs"/></a>--%>
-    <a href="${pageContext.request.contextPath}/main/internet" class="navbar-brand letter"
+    <a href="${pageContext.request.contextPath}/main/menu" class="navbar-brand letter"
+       style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.client.menu"/></a>
+    <a href="${pageContext.request.contextPath}/main/tariffs?service=internet" class="navbar-brand letter"
        style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.internet"/></a>
-    <a href="${pageContext.request.contextPath}/main/tv" class="navbar-brand letter"
+    <a href="${pageContext.request.contextPath}/main/tariffs?service=tv" class="navbar-brand letter"
        style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.tv"/></a>
-    <a href="${pageContext.request.contextPath}/main/telephony" class="navbar-brand letter"
+    <a href="${pageContext.request.contextPath}/main/tariffs?service=telephony" class="navbar-brand letter"
        style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.telephony"/></a>
-    <a href="${pageContext.request.contextPath}/main/clients" class="navbar-brand letter"
-       style="color: ghostwhite; font-size:14pt" >
-        <fmt:message key="navbar.admin.clients"/></a>
-
-
+    <a href="${pageContext.request.contextPath}/main/logout" class="navbar-brand letter"
+       style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.logout"/></a>
     <form method="get" action="${pageContext.request.contextPath}/change-language/main/menu">
         <label for="language"></label>
         <select id="language" name="language"

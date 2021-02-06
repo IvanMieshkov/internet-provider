@@ -2,6 +2,7 @@ package com.example.demo1.model.dao.impl;
 
 import com.example.demo1.model.dao.UserDao;
 import com.example.demo1.model.dao.mapper.UserMapper;
+import com.example.demo1.model.entities.Tariff;
 import com.example.demo1.model.entities.User;
 
 import java.sql.Connection;
@@ -62,24 +63,6 @@ public class JDBCUserDao implements UserDao {
             return null;
         }
     }
-
-//    /**
-//     * Method for searching for user by surname
-//     * @param surname to search
-//     * @param query to db
-//     * @return user found
-//     */
-//    @Override
-//    public User findBySurname(String surname, String query) {
-//        try (PreparedStatement statement = connection.prepareStatement(query)) {
-//            statement.setString(1, surname);
-//
-//            return findUser(statement);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//    }
 
     /**
      * Method for searching for user by login

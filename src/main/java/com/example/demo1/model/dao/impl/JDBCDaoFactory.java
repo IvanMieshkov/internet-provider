@@ -1,9 +1,6 @@
 package com.example.demo1.model.dao.impl;
 
-import com.example.demo1.model.dao.DaoFactory;
-import com.example.demo1.model.dao.ServiceDao;
-import com.example.demo1.model.dao.TariffDao;
-import com.example.demo1.model.dao.UserDao;
+import com.example.demo1.model.dao.*;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -16,12 +13,12 @@ public class JDBCDaoFactory extends DaoFactory {
     private DataSource dataSource = ConnectionPoolHolder.getDataSource();
 
     private Connection getConnection(){
-        try {
-            return dataSource.getConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
+            try {
+                return dataSource.getConnection();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
     }
     @Override
     public UserDao createUserDao() {
@@ -36,6 +33,11 @@ public class JDBCDaoFactory extends DaoFactory {
     @Override
     public ServiceDao createServiceDao() {
         return new JDBCServiceDao(getConnection());
+    }
+
+    @Override
+    public UserTariffDao createUserTariffDao() {
+        return new JDBCUserTariffDao(getConnection());
     }
 
     //    @Override

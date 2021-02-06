@@ -1,5 +1,7 @@
 package com.example.demo1.containers;
 
+import javafx.css.StyleableIntegerProperty;
+
 import javax.management.remote.rmi._RMIConnection_Stub;
 
 /**
@@ -36,6 +38,7 @@ public interface StringContainer {
     String INCORRECT_PASSWORD_WARNING = "warn.incorrect.password";
 
     String CURRENCY = "currency";
+    String PAYMENT = "payment";
 
     String INTERNET_SERVICE = "internet";
     String TV_SERVICE = "tv";
@@ -48,6 +51,9 @@ public interface StringContainer {
     String PRICE_SORTING = "price";
     String ASC = "asc";
     String DESC = "desc";
+
+    String SELECTED_TARIFF = "selectedTariff";
+    String USER_TARIFFS = "userTariffs";
 
 
 

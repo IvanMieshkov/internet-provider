@@ -1,7 +1,13 @@
 package com.example.demo1.controller.filter;
 
+import com.example.demo1.model.dao.DaoFactory;
+import com.example.demo1.model.dao.TariffDao;
 import com.example.demo1.model.dao.UserDao;
+import com.example.demo1.model.dao.UserTariffDao;
+import com.example.demo1.model.dto.TariffDto;
+import com.example.demo1.model.entities.Tariff;
 import com.example.demo1.model.entities.User;
+import com.example.demo1.model.entities.UserTariff;
 import com.example.demo1.model.exceptions.IncorrectDataInputException;
 import org.apache.log4j.Logger;
 import org.mindrot.jbcrypt.BCrypt;
@@ -11,8 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 import static com.example.demo1.containers.RegexContainer.LOGIN_PASSWORD_REGEX;
 import static com.example.demo1.containers.StringContainer.*;
@@ -47,26 +55,30 @@ public class AuthenticationFilter implements Filter {
             }
         }
 
-        @SuppressWarnings("unchecked")
         final AtomicReference<UserDao> userDao = (AtomicReference<UserDao>) request.getServletContext()
                 .getAttribute("userDao");
-
+        final AtomicReference<UserTariffDao> userTariffDao = (AtomicReference<UserTariffDao>) request.getServletContext()
+                .getAttribute("userTariffDao");
         final HttpSession session = request.getSession();
+
 
         if (Objects.nonNull(session) &&
                 Objects.nonNull(session.getAttribute(USER_LOGGED)) &&
                 Objects.nonNull(session.getAttribute(USER_LOGGED_ROLE))) {
 
+
             filterChain.doFilter(request, response);
 
         } else if (Objects.nonNull(userDao.get().findByLogin(login))) {
             final User user = userDao.get().findByLogin(login);
+            final List<UserTariff> userTariffs = userTariffDao.get().findTariffsByUserId(user.getId());
 
             if (BCrypt.checkpw(password, user.getPassword())) {
                 final String role = user.getRole();
 
                 request.getSession().setAttribute(USER_LOGGED, user);
                 request.getSession().setAttribute(USER_LOGGED_ROLE, role);
+                request.getSession().setAttribute(USER_TARIFFS, userTariffs);
 
                 LOGGER.info(role + " authorized");
                 request.getRequestDispatcher("/WEB-INF/view/menu/" + role + "-menu.jsp").forward(request, response);
