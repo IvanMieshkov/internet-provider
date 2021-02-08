@@ -58,7 +58,6 @@ public class JDBCTariffDao implements TariffDao {
             ResultSet rs = statement.executeQuery();
             Tariff tariff = null;
 
-
             if(rs.next()) {
                 tariff = tariffMapper.extractFromResultSet(rs);
             }
@@ -116,8 +115,11 @@ public class JDBCTariffDao implements TariffDao {
     @Override
     public void update(Tariff entity) {
         try (PreparedStatement statement = connection.prepareStatement(UPDATE_TARIFF)) {
-            statement.setDouble(1, entity.getTariffPrice());
-            statement.setInt(2, entity.getId());
+            statement.setString(1, entity.getTariffNameEn());
+            statement.setString(2, entity.getTariffNameUkr());
+            statement.setDouble(3, entity.getTariffPrice());
+            statement.setString(4, entity.getTariffService());
+            statement.setInt(5, entity.getId());
 
             statement.execute();
         } catch (SQLException e) {

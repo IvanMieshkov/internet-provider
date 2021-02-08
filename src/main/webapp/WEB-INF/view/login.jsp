@@ -49,12 +49,12 @@
     </form>
 </nav>
 <br>
-<p align="center" style="color: dodgerblue; font-size: 22pt"><fmt:message key="button.sign-in"/></p>
+<p align="center" style="color: deepskyblue; font-size: 22pt"><fmt:message key="button.sign-in"/></p>
 <div class="form">
     <br>
     <form method="post" action="${pageContext.request.contextPath}/main/menu">
         <p align="center">
-            <input type="text" required placeholder="<fmt:message key="field.user.login"/>" name="login"><br>
+            <input type="text" required placeholder="<fmt:message key="field.user.login"/>" name="login"><br><br>
 
             <input type="password" required placeholder="<fmt:message key="field.user.password"/>" name="password"><br>
             <c:if test="${not empty requestScope.warning}">

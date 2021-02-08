@@ -5,7 +5,6 @@ import com.example.demo1.model.services.impl.ServicesServiceImpl;
 import javax.servlet.http.HttpServletRequest;
 
 import static com.example.demo1.containers.StringContainer.*;
-import static com.example.demo1.containers.StringContainer.USER_LOGGED_ROLE;
 
 /**
  * @author Ivan Mieshkov

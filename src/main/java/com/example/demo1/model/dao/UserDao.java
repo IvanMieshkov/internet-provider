@@ -13,4 +13,6 @@ public interface UserDao extends GenericDao<User> {
     User findByLoginAndPassword(String login, String password);
     void updatePassword(Integer id, String newPassword);
     List<User> findByRole(String role);
+    void updateUserBalance(Integer id, Double payment);
+    void updateUserActive(Integer id, Boolean active);
 }

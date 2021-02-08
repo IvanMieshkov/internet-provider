@@ -1,7 +1,6 @@
 package com.example.demo1.controller.command;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Ivan Mieshkov

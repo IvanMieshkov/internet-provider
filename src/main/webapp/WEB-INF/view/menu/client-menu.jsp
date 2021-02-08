@@ -5,7 +5,7 @@
   Time: 14:56
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="language"
@@ -56,15 +56,23 @@
     </form>
 </nav>
 <br>
-<table class="table" style="color: dodgerblue" >
+<table class="table" style="color: deepskyblue" >
     <tbody>
+
     <tr>
         <th scope="row"><fmt:message key="field.user.login"/></th>
         <td align="right">${sessionScope.user.login}</td>
     </tr>
     <tr>
         <th scope="row"><fmt:message key="field.user.name"/></th>
-        <td align="right">${sessionScope.user.fullName}</td>
+        <c:choose>
+            <c:when test="${language == 'en'}">
+                <td align="right">${sessionScope.user.fullNameEn}</td>
+            </c:when>
+            <c:otherwise>
+                <td align="right">${sessionScope.user.fullNameUkr}</td>
+            </c:otherwise>
+        </c:choose>
     </tr>
     <tr>
         <th scope="row"><fmt:message key="field.user.email"/></th>
@@ -81,46 +89,45 @@
     <tr>
         <th scope="row"><fmt:message key="field.user.balance"/></th>
         <c:choose>
-            <c:when test="${sessionScope.user.balance==0}">
-                <td align="right" scope="row" style="color: red">${sessionScope.user.balance}</td>
+            <c:when test="${sessionScope.user.balance<0}">
+                <td align="right" scope="row" style="color: red">${sessionScope.user.balance}
+                    <fmt:message key="currency"/>
+                    <fmt:message key="field.user.blocked"/></td>
             </c:when>
-            <c:otherwise><td align="right">${sessionScope.user.balance}</td></c:otherwise>
+            <c:otherwise><td>${sessionScope.user.balance} <fmt:message key="currency"/></td></c:otherwise>
         </c:choose>
-
-        <td>
-            <form method="get" action="${pageContext.request.contextPath}/main/payment">
-<%--                <p align="center">--%>
-                    <input type="text" name="payment" required placeholder="<fmt:message key="field.user.payment"/>"/>
-        <td>
-            <button class="btn btn-success" style="background-color: dodgerblue" type="submit"><fmt:message key="field.user.pay"/></button>
-        </td>
-        </p>
-        </form>
-        </td>
-
-    </tr>
-    <tr>
-        <th scope="row"><fmt:message key="field.user.tariffs"/></th>
-
-        <c:forEach var="userTariff" items="${sessionScope.userTariffs}">
-    <tr>
-        <c:if test="${userTariff.tariff.tariffService=='internet'}"><td align="right"><fmt:message key="navbar.internet"/></td></c:if>
-        <c:if test="${userTariff.tariff.tariffService=='tv'}"><td align="right"><fmt:message key="navbar.tv"/></td></c:if>
-        <c:if test="${userTariff.tariff.tariffService=='telephony'}"><td align="right"><fmt:message key="navbar.telephony"/></td></c:if>
-        <td align="right"><c:out value="${language == 'en' ? userTariff.tariff.tariffNameEn : userTariff.tariff.tariffNameUkr}"/></td>
-    </tr>
-    </c:forEach>
     </tr>
     </tbody>
 </table>
-<p align="center" style="color: dodgerblue">
-    <form method="get" action="${pageContext.request.contextPath}/main/change-password">
-<p align="center"><button class="btn btn-success" style="background-color: deepskyblue" type="submit">
-    <fmt:message key="button.edit.password"/>
-</button>
-</p>
+
+<form method="get" action="${pageContext.request.contextPath}/main/payment">
+    <p align="center">
+        <input type="text" name="payment" required placeholder="<fmt:message key="field.user.payment"/>"/>
+        <button class="btn btn-success" style="background-color: deepskyblue" type="submit"><fmt:message key="field.user.pay"/></button>
+    </p>
 </form>
 
-</p>
+
+<p align="center" style="color: deepskyblue"><fmt:message key="field.user.tariffs"/></p>
+<table class="table" style="color: deepskyblue" >
+    <tbody>
+    <c:forEach var="userTariff" items="${sessionScope.userTariffs}">
+        <tr>
+            <c:if test="${userTariff.tariff.tariffService=='internet'}"><th><fmt:message key="navbar.internet"/></th></c:if>
+            <c:if test="${userTariff.tariff.tariffService=='tv'}"><th><fmt:message key="navbar.tv"/></th></c:if>
+            <c:if test="${userTariff.tariff.tariffService=='telephony'}"><th><fmt:message key="navbar.telephony"/></th></c:if>
+            <td align="right"><c:out value="${language == 'en' ? userTariff.tariff.tariffNameEn : userTariff.tariff.tariffNameUkr}"/></td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table><br>
+
+<form method="get" action="${pageContext.request.contextPath}/main/change-password">
+    <p align="center" style="color: deepskyblue">
+        <button class="btn btn-success" style="background-color: deepskyblue" type="submit">
+            <fmt:message key="button.edit.password"/>
+        </button>
+    </p>
+</form>
 </body>
 </html>

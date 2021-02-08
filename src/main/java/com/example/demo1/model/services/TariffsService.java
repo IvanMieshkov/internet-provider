@@ -11,5 +11,9 @@ import java.util.List;
 public interface TariffsService {
     List<TariffDto> getAllTariffs(String language);
     List<TariffDto> getByService(String tariffService, String language, String column, String order);
+    List<TariffDto> getByService(String tariffService, String language);
     List<TariffDto> getByUserId(Integer id, String language);
+    Tariff getByTariffId(Integer id);
+    void tariffEdit(Integer id, String nameUkr, String nameEn, Double price, String service);
+    void tariffCreate(String nameUkr, String nameEn, Double price, String service);
 }

@@ -1,9 +1,9 @@
 package com.example.demo1.controller.command;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import static com.example.demo1.containers.StringContainer.*;
+import static com.example.demo1.containers.StringContainer.LOGIN_PAGE;
+import static com.example.demo1.containers.StringContainer.USER_LOGGED_ROLE;
 
 /**
  * @author Ivan Mieshkov

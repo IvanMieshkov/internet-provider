@@ -10,7 +10,8 @@ import java.util.List;
 public class User {
     private Integer id;
     private String login;
-    private String fullName;
+    private String fullNameEn;
+    private String fullNameUkr;
     private String password;
     private String email;
     private String address;
@@ -22,11 +23,12 @@ public class User {
     public User() {
     }
 
-    public User(Integer id, String login, String fullName, String password,
+    public User(Integer id, String login, String fullNameEn, String fullNameUkr, String password,
                 String email, String address, String phoneNumber, Double balance, String role, Boolean active) {
         this.id = id;
         this.login = login;
-        this.fullName = fullName;
+        this.fullNameEn = fullNameEn;
+        this.fullNameUkr = fullNameUkr;
         this.password = password;
         this.email = email;
         this.address = address;
@@ -34,6 +36,17 @@ public class User {
         this.balance = balance;
         this.role = role;
         this.active = active;
+    }
+
+    public User(String login, String fullNameEn, String fullNameUkr, String password, String email, String address, String phoneNumber, String role) {
+        this.login = login;
+        this.fullNameEn = fullNameEn;
+        this.fullNameUkr = fullNameUkr;
+        this.password = password;
+        this.email = email;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.role = role;
     }
 
     public String getLogin() { return login; }
@@ -52,9 +65,21 @@ public class User {
 
     public void setId(Integer id) { this.id = id; }
 
-    public String getFullName() { return fullName; }
+    public String getFullNameEn() {
+        return fullNameEn;
+    }
 
-    public void setFullName(String fullName) { this.fullName = fullName; }
+    public void setFullNameEn(String fullNameEn) {
+        this.fullNameEn = fullNameEn;
+    }
+
+    public String getFullNameUkr() {
+        return fullNameUkr;
+    }
+
+    public void setFullNameUkr(String fullNameUkr) {
+        this.fullNameUkr = fullNameUkr;
+    }
 
     public String getPassword() { return password; }
 

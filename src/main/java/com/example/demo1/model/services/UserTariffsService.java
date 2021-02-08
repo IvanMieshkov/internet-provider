@@ -9,7 +9,7 @@ import java.util.List;
  * @author Ivan Mieshkov
  */
 public interface UserTariffsService {
-    List<UserTariff> setUserTariffs(int userId, int tariffId, String service);
+    List<UserTariff> setUserTariffs(int userId, int tariffId, String service, double price);
     List<UserTariff> updateTariff(UserTariff userTariff);
     List<UserTariff> deleteTariff();
 }

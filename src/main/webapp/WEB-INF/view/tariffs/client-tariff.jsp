@@ -5,7 +5,7 @@
   Time: 14:03
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="display" uri="http://displaytag.sf.net" %>
@@ -59,8 +59,7 @@
     </form>
 </nav>
 <br>
-
-<table class="table" style="color: dodgerblue">
+<table class="table" style="color: deepskyblue">
     <tbody>
     <tr>
         <th>
@@ -81,29 +80,28 @@
             <form method="get" action="${pageContext.request.contextPath}/main/choose-tariff">
                 <input type="hidden" name="selectedTariff" value="${tariff.tariff.id}"/>
                 <input type="hidden" name="service" value="${tariff.tariff.tariffService}"/>
-                <p align="center">
+                <input type="hidden" name="price" value="${tariff.tariff.tariffPrice}"/>
+                <p>
                     <button class="btn btn-success" style="background-color: deepskyblue" type="submit">
                         <fmt:message key="button.choose"/>
                     </button>
                 </p>
             </form>
-            </p>
         </td>
     </tr>
     </c:forEach>
     </tbody>
 </table>
+<form method="get" target="_blank" action="${pageContext.request.contextPath}/pdf">
+    <input type="hidden" name="service" value="${requestScope.service}"/>
+    <p>
+    <p align="center" style="color: dodgerblue">
+        <button class="btn btn-success" style="background-color: deepskyblue" type="submit">
+            <fmt:message key="button.pdf"/>
+        </button>
+    </p>
 
-<p align="center" style="color: dodgerblue">
-    <form method="get" target="_blank" action="${pageContext.request.contextPath}/pdf">
-        <input type="hidden" name="service" value="${requestScope.service}"/>
-<p align="center">
-    <button class="btn btn-success" style="background-color: deepskyblue" type="submit">
-        <fmt:message key="button.pdf"/>
-    </button>
-</p>
 </form>
-</p>
 
 </body>
 </html>

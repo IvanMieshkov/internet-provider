@@ -17,9 +17,6 @@ import java.util.concurrent.atomic.AtomicReference;
 @WebListener
 public class ContextListener implements ServletContextListener {
 
-    private static final Logger LOGGER = Logger.getLogger(ContextListener.class.getSimpleName());
-
-
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
 

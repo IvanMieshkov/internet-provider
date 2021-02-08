@@ -18,6 +18,13 @@ public class Tariff {
         this.tariffService = tariffService;
     }
 
+    public Tariff(String tariffNameUkr, String tariffNameEn, Double tariffPrice, String tariffService) {
+        this.tariffNameUkr = tariffNameUkr;
+        this.tariffNameEn = tariffNameEn;
+        this.tariffPrice = tariffPrice;
+        this.tariffService = tariffService;
+    }
+
     public Integer getId() {
         return id;
     }

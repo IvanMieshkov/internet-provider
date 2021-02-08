@@ -24,7 +24,8 @@ public class UserMapper implements ObjectMapper<User> {
 
         Integer id = rs.getInt("user_id");
         String login = rs.getString("login_number");
-        String fullName = rs.getString("full_name");
+        String fullNameEn = rs.getString("full_name_en");
+        String fullNameUkr = rs.getString("full_name_ukr");
         String password = rs.getString("password");
         String email = rs.getString("email");
         String address = rs.getString("address");
@@ -33,7 +34,7 @@ public class UserMapper implements ObjectMapper<User> {
         String role = rs.getString("user_role");
         Boolean active = rs.getBoolean("user_active");
 
-        return new User(id, login, fullName, password,
+        return new User(id, login, fullNameEn, fullNameUkr, password,
                 email, address, phoneNumber, balance, role, active);
     }
 

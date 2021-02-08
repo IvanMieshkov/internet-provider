@@ -29,16 +29,20 @@ public class MainServlet extends HttpServlet {
         commands.put("menu", new Menu());
         commands.put("tariffs", new Tariffs());
         commands.put("payment", new Payment());
-//        commands.put("services", new Services());
-        commands.put("clients", new ClientsList());
+        commands.put("clients", new UsersList());
         commands.put("logout", new Logout());
-//        commands.put("change-password", new ChangePassword());
-        commands.put("choose-tariff", new TariffAcception());
-
+        commands.put("change-password", new ChangePassword());
+        commands.put("change-password-commit", new ChangePasswordCommit());
+        commands.put("choose-tariff", new TariffAccepting());
+        commands.put("change-status", new StatusProcessing());
+        commands.put("add-user", new AddUser());
+        commands.put("tariff-edit-form", new TariffEditForm());
+        commands.put("tariff-edit", new TariffEdit());
+        commands.put("tariff-add", new TariffAdd());
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -53,8 +57,10 @@ public class MainServlet extends HttpServlet {
         if(command.checkRole(role)) {
             page = command.execute(request);
         } else {
-            LOGGER.error("Attempt of moving to forbidden page");
-            page = "/WEB-INF/errors/error403.jsp";
+            String message = "Attempt of moving to forbidden page";
+            LOGGER.error(message);
+            request.setAttribute("errorMessage", message);
+            page = "/WEB-INF/errors/error.jsp";
         }
         request.getRequestDispatcher(page).forward(request, response);
 

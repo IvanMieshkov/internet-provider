@@ -1,11 +1,7 @@
 package com.example.demo1.controller.filter;
 
-import com.example.demo1.model.dao.DaoFactory;
-import com.example.demo1.model.dao.TariffDao;
 import com.example.demo1.model.dao.UserDao;
 import com.example.demo1.model.dao.UserTariffDao;
-import com.example.demo1.model.dto.TariffDto;
-import com.example.demo1.model.entities.Tariff;
 import com.example.demo1.model.entities.User;
 import com.example.demo1.model.entities.UserTariff;
 import com.example.demo1.model.exceptions.IncorrectDataInputException;
@@ -20,9 +16,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Collectors;
 
-import static com.example.demo1.containers.RegexContainer.LOGIN_PASSWORD_REGEX;
+import static com.example.demo1.containers.RegexContainer.LOGIN_REGEX;
+import static com.example.demo1.containers.RegexContainer.PASSWORD_REGEX;
 import static com.example.demo1.containers.StringContainer.*;
 
 /**
@@ -97,7 +93,7 @@ public class AuthenticationFilter implements Filter {
     }
 
     private void checkByRegex(String dataToCheck, String warning) throws IncorrectDataInputException {
-        if (!dataToCheck.matches(LOGIN_PASSWORD_REGEX)) {
+        if (!dataToCheck.matches(LOGIN_REGEX) && !dataToCheck.matches(PASSWORD_REGEX)) {
             throw new IncorrectDataInputException(warning);
         }
     }

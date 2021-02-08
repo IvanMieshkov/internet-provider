@@ -29,19 +29,6 @@ public class Tariffs implements Command {
         String sortBy = req.getParameter(SORT_BY);
         String order = req.getParameter(ORDER);
 
-//        int tariff = Integer.parseInt(req.getParameter(SELECTED_TARIFF));
-//        String service = req.getParameter(TARIFF_SERVICE);
-//        User user = (User) req.getSession().getAttribute(USER_LOGGED);
-
-
-        if(sortBy == null) {
-            sortBy = "tariff_name_en";
-        }
-        if(order == null) {
-            order = "ASC";
-        }
-
-
         List<TariffDto> tariffs = new TariffsServiceImpl().getByService(service, language, sortBy, order);
         req.setAttribute("tariffs", tariffs);
         req.setAttribute("service", service);

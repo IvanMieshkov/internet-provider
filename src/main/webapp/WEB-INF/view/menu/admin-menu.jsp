@@ -5,7 +5,7 @@
   Time: 14:56
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="language"
@@ -24,12 +24,6 @@
           crossorigin="anonymous">
 
     <title><fmt:message key="title.main.menu"/></title>
-    <style>
-        .table {
-            width: 40%;
-            margin: 0 auto;
-        }
-    </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light sticky-top justify-content-between"
@@ -38,6 +32,8 @@
         <img src="https://i.ibb.co/nR7vNFX/pngwing-com.png" width="100" height="50" alt="logo"></a>
     <a href="${pageContext.request.contextPath}/main/menu" class="navbar-brand letter"
        style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.client.menu"/></a>
+    <a href="${pageContext.request.contextPath}/main/clients" class="navbar-brand letter"
+       style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.clients"/></a>
     <a href="${pageContext.request.contextPath}/main/tariffs?service=internet" class="navbar-brand letter"
        style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.internet"/></a>
     <a href="${pageContext.request.contextPath}/main/tariffs?service=tv" class="navbar-brand letter"

@@ -25,17 +25,9 @@ public class DownloadServlet extends HttpServlet {
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response) throws IOException {
         String language = (String) request.getSession().getAttribute(LANGUAGE);
-        String path = request.getRequestURI();
         String service = request.getParameter(TARIFF_SERVICE);
         String sortBy = request.getParameter(SORT_BY);
         String order = request.getParameter(ORDER);
-
-        if(sortBy == null) {
-            sortBy = "tariff_name_en";
-        }
-        if(order == null) {
-            order = "ASC";
-        }
 
         response.setContentType("application/pdf;charset=UTF-8");
         response.addHeader("Content-Disposition", "inline; filename=" + "tariffs.pdf");

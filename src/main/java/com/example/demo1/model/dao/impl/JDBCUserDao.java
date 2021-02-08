@@ -33,12 +33,13 @@ public class JDBCUserDao implements UserDao {
     public void create(User entity) {
         try (PreparedStatement statement = connection.prepareStatement(CREATE_USER)) {
             statement.setString(1, entity.getLogin());
-            statement.setString(2, entity.getFullName());
-            statement.setString(3, entity.getPassword());
-            statement.setString(4, entity.getEmail());
-            statement.setString(5, entity.getAddress());
-            statement.setString(6, entity.getPhoneNumber());
-            statement.setString(7, entity.getBalance().toString());
+            statement.setString(2, entity.getFullNameEn());
+            statement.setString(3, entity.getFullNameUkr());
+            statement.setString(4, entity.getPassword());
+            statement.setString(5, entity.getEmail());
+            statement.setString(6, entity.getAddress());
+            statement.setString(7, entity.getPhoneNumber());
+//            statement.setString(8, entity.getBalance().toString());
             statement.setString(8, entity.getRole());
 
             statement.execute();
@@ -142,6 +143,30 @@ public class JDBCUserDao implements UserDao {
     public void updatePassword(Integer id, String newPassword) {
         try (PreparedStatement statement = connection.prepareStatement(UPDATE_USER_PASSWORD)) {
             statement.setString(1, newPassword);
+            statement.setInt(2, id);
+
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateUserActive(Integer id, Boolean active) {
+        try (PreparedStatement statement = connection.prepareStatement(UPDATE_USER_ACTIVE)) {
+            statement.setBoolean(1, active);
+            statement.setInt(2, id);
+
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateUserBalance(Integer id, Double payment) {
+        try (PreparedStatement statement = connection.prepareStatement(UPDATE_USER_BALANCE)) {
+            statement.setDouble(1, payment);
             statement.setInt(2, id);
 
             statement.execute();
