@@ -6,7 +6,7 @@
 
     <filter>
         <filter-name>EncodingFilter</filter-name>
-        <filter-class>com.example.demo1.controller.filter.EncodingFilter</filter-class>
+        <filter-class>com.mieshkov.corplan.controller.filter.EncodingFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>EncodingFilter</filter-name>
@@ -15,7 +15,7 @@
 
     <filter>
         <filter-name>LanguageFilter</filter-name>
-        <filter-class>com.example.demo1.controller.filter.LanguageFilter</filter-class>
+        <filter-class>com.mieshkov.corplan.controller.filter.LanguageFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>LanguageFilter</filter-name>
@@ -24,7 +24,7 @@
 
     <filter>
         <filter-name>AuthenticationFilter</filter-name>
-        <filter-class>com.example.demo1.controller.filter.AuthenticationFilter</filter-class>
+        <filter-class>com.mieshkov.corplan.controller.filter.AuthenticationFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>AuthenticationFilter</filter-name>
@@ -32,7 +32,7 @@
     </filter-mapping>
     <filter>
         <filter-name>RegistrationFilter</filter-name>
-        <filter-class>com.example.demo1.controller.filter.RegistrationFilter</filter-class>
+        <filter-class>com.mieshkov.corplan.controller.filter.RegistrationFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>RegistrationFilter</filter-name>
@@ -42,7 +42,7 @@
 
     <servlet>
         <servlet-name>MainServlet</servlet-name>
-        <servlet-class>com.example.demo1.controller.MainServlet</servlet-class>
+        <servlet-class>com.mieshkov.corplan.controller.MainServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainServlet</servlet-name>
@@ -51,7 +51,7 @@
 
     <servlet>
         <servlet-name>DownloadServlet</servlet-name>
-        <servlet-class>com.example.demo1.controller.DownloadServlet</servlet-class>
+        <servlet-class>com.mieshkov.corplan.controller.DownloadServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DownloadServlet</servlet-name>

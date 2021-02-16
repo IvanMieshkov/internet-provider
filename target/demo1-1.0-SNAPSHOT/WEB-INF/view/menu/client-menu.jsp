@@ -103,7 +103,6 @@
 <form method="get" action="${pageContext.request.contextPath}/main/payment">
     <p align="center">
         <input type="text" name="payment" required placeholder="<fmt:message key="field.user.payment"/>"/>
-        <%--    <br><br>--%>
         <button class="btn btn-success" style="background-color: deepskyblue" type="submit"><fmt:message key="field.user.pay"/></button>
     </p>
 </form>
@@ -112,9 +111,6 @@
 <p align="center" style="color: deepskyblue"><fmt:message key="field.user.tariffs"/></p>
 <table class="table" style="color: deepskyblue" >
     <tbody>
-    <%--    <tr>--%>
-    <%--        <th scope="row"><fmt:message key="field.user.tariffs"/></th>--%>
-
     <c:forEach var="userTariff" items="${sessionScope.userTariffs}">
         <tr>
             <c:if test="${userTariff.tariff.tariffService=='internet'}"><th><fmt:message key="navbar.internet"/></th></c:if>
@@ -123,7 +119,6 @@
             <td align="right"><c:out value="${language == 'en' ? userTariff.tariff.tariffNameEn : userTariff.tariff.tariffNameUkr}"/></td>
         </tr>
     </c:forEach>
-    <%--    </tr>--%>
     </tbody>
 </table><br>
 

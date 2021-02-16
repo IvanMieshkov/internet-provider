@@ -59,8 +59,6 @@
     </form>
 </nav>
 <br>
-
-</p>
 <table class="table" style="color: deepskyblue">
     <tbody>
     <tr>

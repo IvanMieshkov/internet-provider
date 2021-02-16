@@ -54,10 +54,10 @@
 <br>
 
 <div class="form">
-    <p style="color: dodgerblue; font-size: 22pt"><fmt:message key="button.add.user"/></p>
+    <p align="center" style="color: dodgerblue; font-size: 22pt"><fmt:message key="button.add.user"/></p>
     <br>
     <form method="post" action="${pageContext.request.contextPath}/register-user">
-        <p>
+        <p >
             <input type="text" required placeholder="<fmt:message key="field.user.login"/>" name="login"><br><br>
             <input type="text" required placeholder="<fmt:message key="field.user.name.en"/>" name="nameEn"><br><br>
             <input type="text" required placeholder="<fmt:message key="field.user.name.ukr"/>" name="nameUkr"><br><br>
