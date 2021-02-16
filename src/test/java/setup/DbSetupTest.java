@@ -1,6 +1,6 @@
 package setup;
 
-import com.mieshkov.corplan.model.dao.impl.ConnectionPoolHolder;
+import com.example.demo1.model.dao.impl.ConnectionPoolHolder;
 
 import java.sql.Connection;
 import java.sql.SQLException;
