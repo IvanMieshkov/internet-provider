@@ -32,8 +32,8 @@
         <img src="https://i.ibb.co/nR7vNFX/pngwing-com.png" width="100" height="50" alt="logo"></a>
     <a href="${pageContext.request.contextPath}/main/menu" class="navbar-brand letter"
        style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.client.menu"/></a>
-    <a href="${pageContext.request.contextPath}/main/clients" class="navbar-brand letter"
-       style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.clients"/></a>
+<%--    <a href="${pageContext.request.contextPath}/main/clients" class="navbar-brand letter"--%>
+<%--       style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.clients"/></a>--%>
     <a href="${pageContext.request.contextPath}/main/tariffs?service=internet" class="navbar-brand letter"
        style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.internet"/></a>
     <a href="${pageContext.request.contextPath}/main/tariffs?service=tv" class="navbar-brand letter"
@@ -57,7 +57,7 @@
     <p align="center" style="color: dodgerblue; font-size: 22pt"><fmt:message key="button.add.user"/></p>
     <br>
     <form method="post" action="${pageContext.request.contextPath}/register-user">
-        <p >
+        <p align="center">
             <input type="text" required placeholder="<fmt:message key="field.user.login"/>" name="login"><br><br>
             <input type="text" required placeholder="<fmt:message key="field.user.name.en"/>" name="nameEn"><br><br>
             <input type="text" required placeholder="<fmt:message key="field.user.name.ukr"/>" name="nameUkr"><br><br>
@@ -72,10 +72,6 @@
         </p>
     </form>
 </div>
-
-
-
-
 
 </body>
 </html>

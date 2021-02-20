@@ -13,7 +13,7 @@ public interface QueryContainer {
     String FIND_USER_BY_LOGIN_AND_PASSWORD = "SELECT * FROM users WHERE login_number = ? AND password = ?";
     String FIND_ALL_USERS = "SELECT * FROM users";
     String DELETE_USER_BY_ID = "DELETE FROM users WHERE user_id = ?";
-    String UPDATE_USER_PASSWORD = "UPDATE users SET user_password = ? WHERE user_id = ?";
+    String UPDATE_USER_PASSWORD = "UPDATE users SET password = ? WHERE user_id = ?";
     String UPDATE_USER_BALANCE = "UPDATE users SET balance = balance + ? WHERE user_id = ?";
     String UPDATE_USER_ACTIVE = "UPDATE users SET user_active = ? WHERE user_id = ?";
     String FIND_USER_BY_ROLE = "SELECT * FROM users WHERE user_role = ?";

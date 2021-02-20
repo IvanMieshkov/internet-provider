@@ -6,6 +6,7 @@ package com.mieshkov.corplan.controller;
 
 import com.mieshkov.corplan.containers.StringContainer;
 import com.mieshkov.corplan.controller.command.*;
+import com.mieshkov.corplan.model.services.impl.UserServiceImpl;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -28,7 +29,7 @@ public class MainServlet extends HttpServlet {
         commands.put("menu", new Menu());
         commands.put("tariffs", new Tariffs());
         commands.put("payment", new Payment());
-        commands.put("clients", new UsersList());
+        commands.put("clients", new UsersList(new UserServiceImpl()));
         commands.put("logout", new Logout());
         commands.put("change-password", new ChangePassword());
         commands.put("change-password-commit", new ChangePasswordCommit());

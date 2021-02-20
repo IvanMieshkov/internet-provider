@@ -94,17 +94,20 @@
                     <fmt:message key="currency"/>
                     <fmt:message key="field.user.blocked"/></td>
             </c:when>
-            <c:otherwise><td>${sessionScope.user.balance} <fmt:message key="currency"/></td></c:otherwise>
+            <c:otherwise><td align="right">${sessionScope.user.balance} <fmt:message key="currency"/></td></c:otherwise>
         </c:choose>
     </tr>
     </tbody>
 </table>
 
-<form method="get" action="${pageContext.request.contextPath}/main/payment">
-    <p align="center">
+<form align="center" method="get" action="${pageContext.request.contextPath}/main/payment">
+    <p>
         <input type="text" name="payment" required placeholder="<fmt:message key="field.user.payment"/>"/>
         <button class="btn btn-success" style="background-color: deepskyblue" type="submit"><fmt:message key="field.user.pay"/></button>
     </p>
+     <c:if test="${not empty requestScope.warning}">
+        <fmt:message key="${requestScope.warning}"/>
+    </c:if><br>
 </form>
 
 

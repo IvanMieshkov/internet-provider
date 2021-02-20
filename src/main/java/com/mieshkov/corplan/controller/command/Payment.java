@@ -7,6 +7,9 @@ import com.mieshkov.corplan.model.services.impl.UserServiceImpl;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
+import static com.mieshkov.corplan.containers.StringContainer.CLIENT_MENU;
+import static com.mieshkov.corplan.containers.StringContainer.PAYMENT_INCORRECT;
+
 /**
  * @author Ivan Mieshkov
  */
@@ -18,6 +21,10 @@ public class Payment implements Command {
         String role = (String) req.getSession().getAttribute(StringContainer.USER_LOGGED_ROLE);
         User user = (User) req.getSession().getAttribute(StringContainer.USER_LOGGED);
         double amount = Double.parseDouble(req.getParameter(StringContainer.PAYMENT));
+        if(amount < 0) {
+            req.setAttribute("warning", PAYMENT_INCORRECT);
+            return CLIENT_MENU;
+        }
         double balance = user.getBalance() + amount;
         if(balance > 0) {
             user.setActive(true);
@@ -28,7 +35,7 @@ public class Payment implements Command {
         user.setBalance(balance);
 
         req.getSession().setAttribute(StringContainer.USER_LOGGED, user);
-        return "/WEB-INF/view/menu/" + role + "-menu.jsp";
+        return CLIENT_MENU;
     }
 
     @Override

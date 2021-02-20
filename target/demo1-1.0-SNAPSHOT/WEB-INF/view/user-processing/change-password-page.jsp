@@ -42,8 +42,8 @@
     </form>
 </nav>
 
-<div class="form">
-    <p align="center" style="color: deepskyblue; font-size: 22pt"><fmt:message key="button.edit.password"/></p>
+<div align="center" class="form">
+    <p  style="color: deepskyblue; font-size: 22pt"><fmt:message key="button.edit.password"/></p>
     <br>
     <form method="post" action="${pageContext.request.contextPath}/main/change-password-commit">
         <p>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="corplan_db@localhost" uuid="c0fd25b9-d8bd-468a-9a5f-c7c8e114316c">
+    <data-source source="LOCAL" name="corplan_db_test@localhost" uuid="c0fd25b9-d8bd-468a-9a5f-c7c8e114316c">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/corplan_db</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/corplan_db_test</jdbc-url>
       <driver-properties>
         <property name="serverTimezone" value="UTC" />
       </driver-properties>

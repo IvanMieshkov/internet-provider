@@ -7,6 +7,7 @@ import com.mieshkov.corplan.model.dao.UserTariffDao;
 import com.mieshkov.corplan.model.entities.User;
 import com.mieshkov.corplan.model.entities.UserTariff;
 import com.mieshkov.corplan.model.exceptions.IncorrectDataInputException;
+import com.mieshkov.corplan.model.services.impl.UserServiceImpl;
 import org.apache.log4j.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -74,6 +75,10 @@ public class AuthenticationFilter implements Filter {
                 request.getSession().setAttribute(StringContainer.USER_LOGGED_ROLE, role);
                 request.getSession().setAttribute(StringContainer.USER_TARIFFS, userTariffs);
 
+                if(role.equals(StringContainer.ADMIN_ROLE)) {
+//                    request.getSession().setAttribute(StringContainer.USERS_LIST, new UserServiceImpl().showAllUsers());
+                    request.setAttribute(StringContainer.USERS_LIST, new UserServiceImpl().showAllUsers());
+                }
                 LOGGER.info(role + " authorized");
                 request.getRequestDispatcher("/WEB-INF/view/menu/" + role + "-menu.jsp").forward(request, response);
             } else {

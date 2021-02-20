@@ -49,12 +49,12 @@ public class UserServiceImpl implements UserService {
         if (!BCrypt.checkpw(currentPassword, user.getPassword())) {
             throw new IncorrectPasswordException(StringContainer.INCORRECT_PASSWORD_WARNING);
         } else {
-
             checkByRegex(newPassword);
-            Long id = userDao.findByLoginAndPassword(user.getLogin(),
-                    BCrypt.hashpw(user.getPassword(), BCrypt.gensalt())).getId();
+            Long id = userDao.findByLoginAndPassword(user.getLogin(), user.getPassword()).getId();
 
-            DaoFactory.getInstance().createUserDao().updatePassword(id, newPassword);
+            final String newHashPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt());
+
+            DaoFactory.getInstance().createUserDao().updatePassword(id, newHashPassword);
             userDao.close();
         }
     }

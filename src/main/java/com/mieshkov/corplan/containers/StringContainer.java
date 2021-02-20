@@ -17,6 +17,8 @@ public interface StringContainer {
     String LOGIN_PAGE = "/WEB-INF/view/login.jsp";
     String MAIN_PAGE = "/WEB-INF/view/main-page.jsp";
     String USERS_LIST_PAGE = "/WEB-INF/view/admin-processing/users-list.jsp";
+    String CLIENT_MENU = "/WEB-INF/view/menu/client-menu.jsp";
+    String ADMIN_MENU = "/WEB-INF/view/menu/admin-menu.jsp";
     String CHANGE_PASSWORD_PAGE = "/WEB-INF/view/user-processing/change-password-page.jsp";
     String ADD_USER_PAGE = "/WEB-INF/view/admin-processing/add-user.jsp";
     String TARIFF_EDIT_ADD_PAGE = "/WEB-INF/view/admin-processing/tariff-edit-add-form.jsp";
@@ -30,6 +32,7 @@ public interface StringContainer {
     String LOGIN_EXISTS = "warn.login.exists";
     String INCORRECT_PASSWORD_WARNING = "warn.incorrect.password";
     String PHONE_NUMBER_INCORRECT = "warn.incorrect.phone";
+    String PAYMENT_INCORRECT = "warn.incorrect.payment";
 
     String CURRENCY = "currency";
     String PAYMENT = "payment";

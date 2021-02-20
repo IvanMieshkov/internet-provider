@@ -38,8 +38,8 @@
         <img src="https://i.ibb.co/nR7vNFX/pngwing-com.png" width="100" height="50" alt="logo"></a>
     <a href="${pageContext.request.contextPath}/main/menu" class="navbar-brand letter"
        style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.client.menu"/></a>
-    <a href="${pageContext.request.contextPath}/main/clients" class="navbar-brand letter"
-       style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.clients"/></a>
+<%--    <a href="${pageContext.request.contextPath}/main/clients" class="navbar-brand letter"--%>
+<%--       style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.clients"/></a>--%>
     <a href="${pageContext.request.contextPath}/main/tariffs?service=internet" class="navbar-brand letter"
        style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.internet"/></a>
     <a href="${pageContext.request.contextPath}/main/tariffs?service=tv" class="navbar-brand letter"
@@ -48,7 +48,7 @@
        style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.telephony"/></a>
     <a href="${pageContext.request.contextPath}/main/logout" class="navbar-brand letter"
        style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.logout"/></a>
-    <form method="get" action="${pageContext.request.contextPath}/change-language/main/clients">
+    <form method="get" action="${pageContext.request.contextPath}/change-language/main/menu">
         <label for="language"></label>
         <select id="language" name="language"
                 onchange="submit()" style="font-size: 11pt; background-color: ghostwhite; color: deepskyblue">
@@ -59,7 +59,7 @@
 </nav>
 <br>
 
-
+<p align="center" style="color: dodgerblue; font-size: 22pt"><fmt:message key="title.client.list"/></p>
 <table class="table" style="color: dodgerblue">
     <tbody>
     <tr>

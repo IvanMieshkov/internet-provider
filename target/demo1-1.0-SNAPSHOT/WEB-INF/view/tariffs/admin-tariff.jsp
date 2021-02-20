@@ -38,8 +38,8 @@
         <img src="https://i.ibb.co/nR7vNFX/pngwing-com.png" width="100" height="50" alt="logo"></a>
     <a href="${pageContext.request.contextPath}/main/menu" class="navbar-brand letter"
        style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.client.menu"/></a>
-    <a href="${pageContext.request.contextPath}/main/clients" class="navbar-brand letter"
-       style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.clients"/></a>
+<%--    <a href="${pageContext.request.contextPath}/main/clients" class="navbar-brand letter"--%>
+<%--       style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.clients"/></a>--%>
     <a href="${pageContext.request.contextPath}/main/tariffs?service=internet" class="navbar-brand letter"
        style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.internet"/></a>
     <a href="${pageContext.request.contextPath}/main/tariffs?service=tv" class="navbar-brand letter"
@@ -94,7 +94,7 @@
 </table><br>
 
 <form method="get" action="${pageContext.request.contextPath}/main/tariff-edit-form">
-    <p style="color: deepskyblue">
+    <p align="center" style="color: deepskyblue">
         <button class="btn btn-success" style="background-color: deepskyblue" type="submit">
             <fmt:message key="button.add.tariff"/>
         </button>

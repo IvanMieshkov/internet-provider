@@ -38,8 +38,8 @@
         <img src="https://i.ibb.co/nR7vNFX/pngwing-com.png" width="100" height="50" alt="logo"></a>
     <a href="${pageContext.request.contextPath}/main/menu" class="navbar-brand letter"
        style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.client.menu"/></a>
-    <a href="${pageContext.request.contextPath}/main/clients" class="navbar-brand letter"
-       style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.clients"/></a>
+<%--    <a href="${pageContext.request.contextPath}/main/clients" class="navbar-brand letter"--%>
+<%--       style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.clients"/></a>--%>
     <a href="${pageContext.request.contextPath}/main/tariffs?service=internet" class="navbar-brand letter"
        style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.internet"/></a>
     <a href="${pageContext.request.contextPath}/main/tariffs?service=tv" class="navbar-brand letter"
