@@ -2,8 +2,8 @@ package com.mieshkov.corplan.controller.filter;
 
 import com.mieshkov.corplan.containers.StringContainer;
 import com.mieshkov.corplan.model.entities.User;
+import com.mieshkov.corplan.model.exceptions.EmailAlreadyExistsException;
 import com.mieshkov.corplan.model.exceptions.IncorrectDataInputException;
-import com.mieshkov.corplan.model.exceptions.LoginAlreadyExistsException;
 import com.mieshkov.corplan.model.services.impl.UserServiceImpl;
 import org.apache.log4j.Logger;
 import org.mindrot.jbcrypt.BCrypt;
@@ -33,7 +33,6 @@ public class RegistrationFilter implements Filter {
         final HttpServletRequest request = (HttpServletRequest) servletRequest;
         final HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        final String login = request.getParameter(StringContainer.LOGIN);
         final String nameEn = request.getParameter(StringContainer.NAME_EN);
         final String nameUkr = request.getParameter(StringContainer.NAME_UKR);
         final String password = request.getParameter(StringContainer.PASSWORD);
@@ -42,7 +41,6 @@ public class RegistrationFilter implements Filter {
         final String phone = request.getParameter(StringContainer.PHONE);
 
         try {
-            checkByRegex(login, LOGIN_REGEX, StringContainer.LOGIN_INCORRECT);
             checkByRegex(nameEn, LAT_NAME_SURNAME_REGEX, StringContainer.USER_NAME_LAT_INCORRECT);
             checkByRegex(nameUkr, UKR_NAME_SURNAME_REGEX, StringContainer.USER_NAME_UKR_INCORRECT);
             checkByRegex(password, PASSWORD_REGEX, StringContainer.PASSWORD_INCORRECT);
@@ -57,18 +55,18 @@ public class RegistrationFilter implements Filter {
         }
 
         final String hashPassword = BCrypt.hashpw(password, BCrypt.gensalt());
-        User user = new User(login, nameEn, nameUkr, hashPassword, email, address, phone, StringContainer.CLIENT_ROLE);
+        User user = new User(nameEn, nameUkr, hashPassword, email, address, phone, StringContainer.CLIENT_ROLE);
 
         try {
             new UserServiceImpl().registerUser(user);
-        } catch (LoginAlreadyExistsException e) {
+        } catch (EmailAlreadyExistsException e) {
             request.setAttribute("warning", StringContainer.LOGIN_EXISTS);
             LOGGER.warn("Attempt to register already registered user");
             request.getRequestDispatcher(StringContainer.ADD_USER_PAGE).forward(request, response);
             return;
         }
         request.setAttribute(StringContainer.USERS_LIST, new UserServiceImpl().showAllUsers());
-        request.getRequestDispatcher(StringContainer.USERS_LIST_PAGE).forward(request, response);
+        request.getRequestDispatcher(StringContainer.ADMIN_MENU).forward(request, response);
     }
 
     @Override

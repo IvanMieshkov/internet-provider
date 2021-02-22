@@ -10,7 +10,7 @@ import java.util.Arrays;
  * @author Ivan Mieshkov
  */
 public class Logout implements Command {
-    private String[] hadAccess = {StringContainer.CLIENT_ROLE, StringContainer.ADMIN_ROLE};
+    private final String[] hadAccess = {StringContainer.CLIENT_ROLE, StringContainer.ADMIN_ROLE};
     @Override
     public String execute(HttpServletRequest req) {
         final HttpSession session = req.getSession();

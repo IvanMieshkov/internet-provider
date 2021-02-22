@@ -10,16 +10,22 @@ import java.util.Arrays;
  * @author Ivan Mieshkov
  */
 public class StatusProcessing implements Command {
-    private String[] hasAccess = {StringContainer.ADMIN_ROLE};
+    private final String[] hasAccess = {StringContainer.ADMIN_ROLE};
+    private final UserServiceImpl userService;
+
+    public StatusProcessing(UserServiceImpl userService) {
+        this.userService = userService;
+    }
+
     @Override
     public String execute(HttpServletRequest req) {
         Long id = Long.parseLong(req.getParameter(StringContainer.USER_ID));
         boolean active = !Boolean.parseBoolean(req.getParameter(StringContainer.ACTIVE));
-        new UserServiceImpl().updateActive(id, active);
+        userService.updateActive(id, active);
 
-        req.setAttribute(StringContainer.USERS_LIST, new UserServiceImpl().showAllUsers());
+        req.setAttribute(StringContainer.USERS_LIST, userService.showAllUsers());
 
-        return StringContainer.USERS_LIST_PAGE;
+        return StringContainer.ADMIN_MENU;
     }
 
     @Override

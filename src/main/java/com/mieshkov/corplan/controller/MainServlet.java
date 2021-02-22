@@ -6,7 +6,9 @@ package com.mieshkov.corplan.controller;
 
 import com.mieshkov.corplan.containers.StringContainer;
 import com.mieshkov.corplan.controller.command.*;
+import com.mieshkov.corplan.model.services.impl.TariffsServiceImpl;
 import com.mieshkov.corplan.model.services.impl.UserServiceImpl;
+import com.mieshkov.corplan.model.services.impl.UserTariffServiceImpl;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -25,20 +27,18 @@ public class MainServlet extends HttpServlet {
     public void init() {
         commands = new HashMap<>();
         commands.put("main-page", new MainPage());
-        commands.put("login", new Login());
-        commands.put("menu", new Menu());
-        commands.put("tariffs", new Tariffs());
-        commands.put("payment", new Payment());
-        commands.put("clients", new UsersList(new UserServiceImpl()));
+        commands.put("login", new Login(new UserServiceImpl()));
+        commands.put("menu", new Menu(new UserServiceImpl()));
+        commands.put("tariffs", new Tariffs(new TariffsServiceImpl()));
+        commands.put("payment", new Payment(new UserServiceImpl()));
         commands.put("logout", new Logout());
         commands.put("change-password", new ChangePassword());
-        commands.put("change-password-commit", new ChangePasswordCommit());
-        commands.put("choose-tariff", new TariffAccepting());
-        commands.put("change-status", new StatusProcessing());
+        commands.put("change-password-commit", new ChangePasswordCommit(new UserServiceImpl()));
+        commands.put("choose-tariff", new TariffAccepting(new UserServiceImpl(), new UserTariffServiceImpl()));
+        commands.put("change-status", new StatusProcessing(new UserServiceImpl()));
         commands.put("add-user", new AddUser());
         commands.put("tariff-edit-form", new TariffEditForm());
-        commands.put("tariff-edit", new TariffEdit());
-        commands.put("tariff-add", new TariffAdd());
+        commands.put("user-delete", new UserDelete(new UserServiceImpl()));
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{

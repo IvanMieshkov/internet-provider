@@ -1,0 +1,4 @@
+com\example\demo1\model\services\impl\UserServiceImplTest.class
+com\example\demo1\model\services\impl\TariffsServiceImplTest.class
+setup\DbSetupTest.class
+com\mieshkov\corplan\controller\command\UsersListTest.class

@@ -16,9 +16,14 @@ import static com.mieshkov.corplan.containers.StringContainer.PAYMENT_INCORRECT;
 
 public class Payment implements Command {
     private String[] hasAccess = {StringContainer.CLIENT_ROLE};
+    private final UserServiceImpl userService;
+
+    public Payment(UserServiceImpl userService) {
+        this.userService = userService;
+    }
+
     @Override
     public String execute(HttpServletRequest req) {
-        String role = (String) req.getSession().getAttribute(StringContainer.USER_LOGGED_ROLE);
         User user = (User) req.getSession().getAttribute(StringContainer.USER_LOGGED);
         double amount = Double.parseDouble(req.getParameter(StringContainer.PAYMENT));
         if(amount < 0) {
@@ -28,10 +33,10 @@ public class Payment implements Command {
         double balance = user.getBalance() + amount;
         if(balance > 0) {
             user.setActive(true);
-            new UserServiceImpl().updateActive(user.getId(), true);
+            userService.updateActive(user.getId(), true);
         }
 
-        new UserServiceImpl().changeBalance(user.getId(), amount);
+        userService.changeBalance(user.getId(), amount);
         user.setBalance(balance);
 
         req.getSession().setAttribute(StringContainer.USER_LOGGED, user);

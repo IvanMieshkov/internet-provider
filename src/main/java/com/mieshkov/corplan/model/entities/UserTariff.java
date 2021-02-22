@@ -34,11 +34,6 @@ public class UserTariff {
         this.service = service;
     }
 
-    public UserTariff(Long userId, Long tariffId) {
-        this.userId = userId;
-        this.tariffId = tariffId;
-    }
-
     public String getService() {
         return service;
     }

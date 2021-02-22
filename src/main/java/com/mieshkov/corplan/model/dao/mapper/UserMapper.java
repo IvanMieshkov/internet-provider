@@ -20,19 +20,18 @@ public class UserMapper implements ObjectMapper<User> {
     @Override
     public User extractFromResultSet(ResultSet rs) throws SQLException {
 
-        Long id = rs.getLong("user_id");
-        String login = rs.getString("login_number");
-        String fullNameEn = rs.getString("full_name_en");
-        String fullNameUkr = rs.getString("full_name_ukr");
+        Long id = rs.getLong("id");
+        String nameEn = rs.getString("name_en");
+        String nameUkr = rs.getString("name_ukr");
         String password = rs.getString("password");
         String email = rs.getString("email");
         String address = rs.getString("address");
         String phoneNumber = rs.getString("phone_number");
         Double balance = rs.getDouble("balance");
-        String role = rs.getString("user_role");
-        Boolean active = rs.getBoolean("user_active");
+        String role = rs.getString("role");
+        Boolean active = rs.getBoolean("active");
 
-        return new User(id, login, fullNameEn, fullNameUkr, password,
+        return new User(id, nameEn, nameUkr, password,
                 email, address, phoneNumber, balance, role, active);
     }
 

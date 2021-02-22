@@ -17,10 +17,9 @@ import static com.mieshkov.corplan.containers.QueryContainer.*;
  * @author Ivan Mieshkov
  */
 public class JDBCUserTariffDao implements UserTariffDao {
-    private Connection connection;
-    private UserTariffMapper userTariffMapper = new UserTariffMapper();
-    private List<UserTariff> userTariffs = new ArrayList<>();
-
+    private final Connection connection;
+    private final UserTariffMapper userTariffMapper = new UserTariffMapper();
+    private final List<UserTariff> userTariffs = new ArrayList<>();
 
     JDBCUserTariffDao(Connection connection) {
         this.connection = connection;
@@ -52,9 +51,9 @@ public class JDBCUserTariffDao implements UserTariffDao {
      * @return userTariff found entity
      */
     @Override
-    public UserTariff findById(int id) {
+    public UserTariff findById(Long id) {
         try (PreparedStatement statement = connection.prepareStatement(FIND_USER_TARIFF_BY_ID)) {
-            statement.setInt(1, id);
+            statement.setLong(1, id);
             ResultSet rs = statement.executeQuery();
             UserTariff userTariff = null;
 
@@ -103,7 +102,7 @@ public class JDBCUserTariffDao implements UserTariffDao {
      * @param id
      */
     @Override
-    public void delete(int id) {
+    public void delete(Long id) {
 
     }
 
@@ -145,34 +144,6 @@ public class JDBCUserTariffDao implements UserTariffDao {
         }
     }
 
-    /**
-     * Method, that search for userTariffs by tariff
-     * @param id of tariff
-     * @return list of userTariffs found
-     */
-    @Override
-    public List<UserTariff> findUsersByTariffId(Long id) {
-        try (PreparedStatement statement = connection.prepareStatement(FIND_USERS_BY_TARIFF_ID)) {
-            statement.setLong(1, id);
-
-            return listFinder(statement);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    @Override
-    public List<UserTariff> findServicesByUserId(Long id) {
-        try (PreparedStatement statement = connection.prepareStatement(FIND_SERVICES_BY_USER_ID)) {
-            statement.setLong(1, id);
-
-            return listFinder(statement);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
     /**
      * Method for executing statement and fetching users data from result set.
      * Method to eliminate duplicate code

@@ -9,7 +9,7 @@ import java.util.Arrays;
  * @author Ivan Mieshkov
  */
 public class AddUser implements Command {
-    private String[] hasAccess = {StringContainer.ADMIN_ROLE};
+    private final String[] hasAccess = {StringContainer.ADMIN_ROLE};
     @Override
     public String execute(HttpServletRequest req) {
         return StringContainer.ADD_USER_PAGE;

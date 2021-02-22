@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class UsersList implements Command {
     static final Logger LOGGER = Logger.getLogger(UsersList.class);
-    private String[] hasAccess = {StringContainer.ADMIN_ROLE};
+    private final String[] hasAccess = {StringContainer.ADMIN_ROLE};
     private final UserServiceImpl userService;
 
     public UsersList(UserServiceImpl userService) {
@@ -24,7 +24,7 @@ public class UsersList implements Command {
 
     @Override
     public String execute(HttpServletRequest req) {
-        List<User> usersList = null;
+        List<User> usersList;
         try {
             usersList = userService.showAllUsers();
         } catch (DbProcessingException e) {

@@ -38,8 +38,6 @@
         <img src="https://i.ibb.co/nR7vNFX/pngwing-com.png" width="100" height="50" alt="logo"></a>
     <a href="${pageContext.request.contextPath}/main/menu" class="navbar-brand letter"
        style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.client.menu"/></a>
-<%--    <a href="${pageContext.request.contextPath}/main/clients" class="navbar-brand letter"--%>
-<%--       style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.clients"/></a>--%>
     <a href="${pageContext.request.contextPath}/main/tariffs?service=internet" class="navbar-brand letter"
        style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.internet"/></a>
     <a href="${pageContext.request.contextPath}/main/tariffs?service=tv" class="navbar-brand letter"
@@ -73,13 +71,13 @@
 
         <c:forEach var="client" items="${requestScope.clients}">
     <tr>
-        <td><c:out value="${client.login}"/></td>
+        <td><c:out value="${client.id}"/></td>
         <c:choose>
             <c:when test="${language == 'en'}">
-                <td><c:out value="${client.fullNameEn}"/></td>
+                <td><c:out value="${client.nameEn}"/></td>
             </c:when>
             <c:otherwise>
-                <td><c:out value="${client.fullNameUkr}"/></td>
+                <td><c:out value="${client.nameUkr}"/></td>
             </c:otherwise>
         </c:choose>
         <td><c:out value="${client.email}"/></td>
@@ -103,6 +101,17 @@
                 <p align="center">
                     <button class="btn btn-success" style="background-color: deepskyblue" type="submit">
                         <fmt:message key="button.change.status"/>
+                    </button>
+                </p>
+            </form>
+            </p>
+        </td>
+        <td>
+            <form method="get" action="${pageContext.request.contextPath}/main/user-delete">
+                <input type="hidden" name="id" value="${client.id}"/>
+                <p align="center">
+                    <button class="btn btn-success" style="background-color: deepskyblue" type="submit">
+                        <fmt:message key="button.delete.account"/>
                     </button>
                 </p>
             </form>

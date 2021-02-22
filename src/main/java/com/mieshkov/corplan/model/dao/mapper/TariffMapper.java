@@ -12,13 +12,13 @@ import java.util.Map;
 public class TariffMapper implements ObjectMapper<Tariff> {
     @Override
     public Tariff extractFromResultSet(ResultSet rs) throws SQLException {
-        Long id = rs.getLong("tariff_id");
-        String tariffNameUkr = rs.getString("tariff_name_ukr");
-        String tariffNameEn = rs.getString("tariff_name_en");
-        Double tariffPrice = rs.getDouble("tariff_price");
-        String tariffService = rs.getString("tariff_service");
+        Long id = rs.getLong("id");
+        String nameUkr = rs.getString("name_ukr");
+        String nameEn = rs.getString("name_en");
+        Double price = rs.getDouble("price");
+        String service = rs.getString("service");
 
-        return new Tariff(id, tariffNameUkr, tariffNameEn, tariffPrice, tariffService);
+        return new Tariff(id, nameUkr, nameEn, price, service);
     }
 
     /**

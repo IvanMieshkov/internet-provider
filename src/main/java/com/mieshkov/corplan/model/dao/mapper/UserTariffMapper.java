@@ -19,10 +19,10 @@ public class UserTariffMapper implements ObjectMapper<UserTariff> {
      */
     @Override
     public UserTariff extractFromResultSet(ResultSet rs) throws SQLException {
-        Long id = rs.getLong("user_tariff_id");
+        Long id = rs.getLong("id");
         Long userId = rs.getLong("user_id");
         Long tariffId = rs.getLong("tariff_id");
-        String service = rs.getString("tariff_service");
+        String service = rs.getString("service");
         Tariff tariff = new TariffMapper().extractFromResultSet(rs);
 
         return new UserTariff(id, userId, tariffId, service, tariff);

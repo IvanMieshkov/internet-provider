@@ -5,24 +5,24 @@ package com.mieshkov.corplan.model.entities;
  */
 public class Tariff {
     private Long id;
-    private String tariffNameUkr;
-    private String tariffNameEn;
-    private Double tariffPrice;
-    private String tariffService;
+    private String nameUkr;
+    private String nameEn;
+    private Double price;
+    private String service;
 
-    public Tariff(Long id, String tariffNameUkr, String tariffNameEn, Double tariffPrice, String tariffService) {
+    public Tariff(Long id, String nameUkr, String nameEn, Double price, String service) {
         this.id = id;
-        this.tariffNameUkr = tariffNameUkr;
-        this.tariffNameEn = tariffNameEn;
-        this.tariffPrice = tariffPrice;
-        this.tariffService = tariffService;
+        this.nameUkr = nameUkr;
+        this.nameEn = nameEn;
+        this.price = price;
+        this.service = service;
     }
 
-    public Tariff(String tariffNameUkr, String tariffNameEn, Double tariffPrice, String tariffService) {
-        this.tariffNameUkr = tariffNameUkr;
-        this.tariffNameEn = tariffNameEn;
-        this.tariffPrice = tariffPrice;
-        this.tariffService = tariffService;
+    public Tariff(String nameUkr, String nameEn, Double price, String service) {
+        this.nameUkr = nameUkr;
+        this.nameEn = nameEn;
+        this.price = price;
+        this.service = service;
     }
 
     public Long getId() {
@@ -33,35 +33,35 @@ public class Tariff {
         this.id = id;
     }
 
-    public String getTariffNameUkr() {
-        return tariffNameUkr;
+    public String getNameUkr() {
+        return nameUkr;
     }
 
-    public String getTariffNameEn() {
-        return tariffNameEn;
+    public void setNameUkr(String nameUkr) {
+        this.nameUkr = nameUkr;
     }
 
-    public void setTariffNameUkr(String tariffNameUkr) {
-        this.tariffNameUkr = tariffNameUkr;
+    public String getNameEn() {
+        return nameEn;
     }
 
-    public void setTariffNameEn(String tariffNameEn) {
-        this.tariffNameEn = tariffNameEn;
+    public void setNameEn(String nameEn) {
+        this.nameEn = nameEn;
     }
 
-    public Double getTariffPrice() {
-        return tariffPrice;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setTariffPrice(Double tariffPrice) {
-        this.tariffPrice = tariffPrice;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
-    public String getTariffService() {
-        return tariffService;
+    public String getService() {
+        return service;
     }
 
-    public void setTariffService(String tariffService) {
-        this.tariffService = tariffService;
+    public void setService(String service) {
+        this.service = service;
     }
 }

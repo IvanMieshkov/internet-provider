@@ -16,9 +16,9 @@ import static com.mieshkov.corplan.containers.QueryContainer.*;
  * @author Ivan Mieshkov
  */
 public class JDBCUserDao implements UserDao {
-    private Connection connection;
-    private UserMapper userMapper = new UserMapper();
-    private Map<Long, User> users = new HashMap<>();
+    private final Connection connection;
+    private final UserMapper userMapper = new UserMapper();
+    private final Map<Long, User> users = new HashMap<>();
 
     JDBCUserDao(Connection connection) {
         this.connection = connection;
@@ -31,15 +31,13 @@ public class JDBCUserDao implements UserDao {
     @Override
     public void create(User entity) {
         try (PreparedStatement statement = connection.prepareStatement(CREATE_USER)) {
-            statement.setString(1, entity.getLogin());
-            statement.setString(2, entity.getFullNameEn());
-            statement.setString(3, entity.getFullNameUkr());
-            statement.setString(4, entity.getPassword());
-            statement.setString(5, entity.getEmail());
-            statement.setString(6, entity.getAddress());
-            statement.setString(7, entity.getPhoneNumber());
-//            statement.setString(8, entity.getBalance().toString());
-            statement.setString(8, entity.getRole());
+            statement.setString(1, entity.getNameEn());
+            statement.setString(2, entity.getNameUkr());
+            statement.setString(3, entity.getPassword());
+            statement.setString(4, entity.getEmail());
+            statement.setString(5, entity.getAddress());
+            statement.setString(6, entity.getPhoneNumber());
+            statement.setString(7, entity.getRole());
 
             statement.execute();
         } catch (SQLException e) {
@@ -53,26 +51,9 @@ public class JDBCUserDao implements UserDao {
      * @return user found
      */
     @Override
-    public User findById(int id) {
+    public User findById(Long id) {
         try (PreparedStatement statement = connection.prepareStatement(FIND_USER_BY_ID)) {
-            statement.setInt(1, id);
-
-            return findUser(statement);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    /**
-     * Method for searching for user by login
-     * @param login to search
-     * @return user found
-     */
-    @Override
-    public User findByLogin(String login) {
-        try (PreparedStatement statement = connection.prepareStatement(FIND_USER_BY_LOGIN)) {
-            statement.setString(1, login);
+            statement.setLong(1, id);
 
             return findUser(statement);
         } catch (SQLException e) {
@@ -88,9 +69,9 @@ public class JDBCUserDao implements UserDao {
      * @return user found
      */
     @Override
-    public User findByLoginAndPassword(String login, String password) {
+    public User findByLoginAndPassword(Long login, String password) {
         try (PreparedStatement statement = connection.prepareStatement(FIND_USER_BY_LOGIN_AND_PASSWORD)) {
-            statement.setString(1, login);
+            statement.setLong(1, login);
             statement.setString(2, password);
 
             return findUser(statement);
@@ -119,15 +100,14 @@ public class JDBCUserDao implements UserDao {
      * Method for deleting user by id
      * @param id to delete
      */
-    public void delete(int id) {
+    public void delete(Long id) {
         try (PreparedStatement statement = connection.prepareStatement(DELETE_USER_BY_ID)) {
-            statement.setInt(1, id);
+            statement.setLong(1, id);
             statement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
 
     @Override
     public void update(User entity) {
@@ -171,23 +151,6 @@ public class JDBCUserDao implements UserDao {
             statement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-    }
-
-    /**
-     * Method for finding users by role
-     * @param role of users, that should be found
-     * @return list of users found
-     */
-    @Override
-    public List<User> findByRole(String role) {
-        try (PreparedStatement statement = connection.prepareStatement(FIND_USER_BY_ROLE)) {
-            statement.setString(1, role);
-
-            return findUsersList(statement);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
         }
     }
 

@@ -22,6 +22,7 @@ public interface StringContainer {
     String CHANGE_PASSWORD_PAGE = "/WEB-INF/view/user-processing/change-password-page.jsp";
     String ADD_USER_PAGE = "/WEB-INF/view/admin-processing/add-user.jsp";
     String TARIFF_EDIT_ADD_PAGE = "/WEB-INF/view/admin-processing/tariff-edit-add-form.jsp";
+    String CLIENT_TARIFF = "/WEB-INF/view/tariffs/client-tariff.jsp";
 
     String USER_NAME_UKR_INCORRECT = "warn.incorrect.user.name.ukr";
     String USER_NAME_LAT_INCORRECT = "warn.incorrect.user.name.lat";
@@ -33,22 +34,20 @@ public interface StringContainer {
     String INCORRECT_PASSWORD_WARNING = "warn.incorrect.password";
     String PHONE_NUMBER_INCORRECT = "warn.incorrect.phone";
     String PAYMENT_INCORRECT = "warn.incorrect.payment";
+    String LOW_BALANCE = "warn.low.balance";
 
-    String CURRENCY = "currency";
     String PAYMENT = "payment";
 
     String TARIFF_SERVICE = "service";
     String SORT_BY = "sortBy";
     String ORDER = "order";
 
-    String LOGIN = "login";
     String NAME_EN = "nameEn";
     String NAME_UKR = "nameUkr";
     String PASSWORD = "password";
     String EMAIL = "email";
     String ADDRESS = "address";
     String PHONE = "phone";
-    String SELECTED_TARIFF = "selectedTariff";
     String USER_TARIFFS = "userTariffs";
     String ACTIVE = "active";
     String USER_ID = "id";

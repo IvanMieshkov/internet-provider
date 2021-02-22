@@ -11,13 +11,13 @@ import java.util.Arrays;
  * @author Ivan Mieshkov
  */
 public class TariffEditForm implements Command {
-    private String[] hasAccess = {StringContainer.ADMIN_ROLE};
+    private final String[] hasAccess = {StringContainer.ADMIN_ROLE};
     @Override
     public String execute(HttpServletRequest req) {
         Tariff tariff;
-        int id;
+        long id;
         try {
-            id = Integer.parseInt(req.getParameter(StringContainer.TARIFF_ID));
+            id = Long.parseLong(req.getParameter(StringContainer.TARIFF_ID));
         } catch (NumberFormatException e) {
             return StringContainer.TARIFF_EDIT_ADD_PAGE;
         }

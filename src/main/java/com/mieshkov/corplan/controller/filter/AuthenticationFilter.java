@@ -49,6 +49,11 @@ public class AuthenticationFilter implements Filter {
                 request.getRequestDispatcher(StringContainer.LOGIN_PAGE).forward(request, response);
             }
         }
+        long id = 0L;
+
+        if(login!= null) {
+             id = Long.parseLong(login);
+        }
 
         final AtomicReference<UserDao> userDao = (AtomicReference<UserDao>) request.getServletContext()
                 .getAttribute("userDao");
@@ -64,8 +69,8 @@ public class AuthenticationFilter implements Filter {
 
             filterChain.doFilter(request, response);
 
-        } else if (Objects.nonNull(userDao.get().findByLogin(login))) {
-            final User user = userDao.get().findByLogin(login);
+        } else if (Objects.nonNull(userDao.get().findById(id))) {
+            final User user = userDao.get().findById(id);
             final List<UserTariff> userTariffs = userTariffDao.get().findTariffsByUserId(user.getId());
 
             if (BCrypt.checkpw(password, user.getPassword())) {
@@ -76,7 +81,6 @@ public class AuthenticationFilter implements Filter {
                 request.getSession().setAttribute(StringContainer.USER_TARIFFS, userTariffs);
 
                 if(role.equals(StringContainer.ADMIN_ROLE)) {
-//                    request.getSession().setAttribute(StringContainer.USERS_LIST, new UserServiceImpl().showAllUsers());
                     request.setAttribute(StringContainer.USERS_LIST, new UserServiceImpl().showAllUsers());
                 }
                 LOGGER.info(role + " authorized");

@@ -5,9 +5,8 @@ package com.mieshkov.corplan.model.entities;
  */
 public class User {
     private Long id;
-    private String login;
-    private String fullNameEn;
-    private String fullNameUkr;
+    private String nameEn;
+    private String nameUkr;
     private String password;
     private String email;
     private String address;
@@ -19,12 +18,11 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String login, String fullNameEn, String fullNameUkr, String password,
+    public User(Long id, String nameEn, String nameUkr, String password,
                 String email, String address, String phoneNumber, Double balance, String role, Boolean active) {
         this.id = id;
-        this.login = login;
-        this.fullNameEn = fullNameEn;
-        this.fullNameUkr = fullNameUkr;
+        this.nameEn = nameEn;
+        this.nameUkr = nameUkr;
         this.password = password;
         this.email = email;
         this.address = address;
@@ -34,20 +32,15 @@ public class User {
         this.active = active;
     }
 
-    public User(String login, String fullNameEn, String fullNameUkr, String password, String email, String address, String phoneNumber, String role) {
-        this.login = login;
-        this.fullNameEn = fullNameEn;
-        this.fullNameUkr = fullNameUkr;
+    public User(String nameEn, String nameUkr, String password, String email, String address, String phoneNumber, String role) {
+        this.nameEn = nameEn;
+        this.nameUkr = nameUkr;
         this.password = password;
         this.email = email;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.role = role;
     }
-
-    public String getLogin() { return login; }
-
-    public void setLogin(String login) { this.login = login; }
 
     public String getAddress() { return address; }
 
@@ -61,20 +54,20 @@ public class User {
 
     public void setId(Long id) { this.id = id; }
 
-    public String getFullNameEn() {
-        return fullNameEn;
+    public String getNameEn() {
+        return nameEn;
     }
 
-    public void setFullNameEn(String fullNameEn) {
-        this.fullNameEn = fullNameEn;
+    public void setNameEn(String nameEn) {
+        this.nameEn = nameEn;
     }
 
-    public String getFullNameUkr() {
-        return fullNameUkr;
+    public String getNameUkr() {
+        return nameUkr;
     }
 
-    public void setFullNameUkr(String fullNameUkr) {
-        this.fullNameUkr = fullNameUkr;
+    public void setNameUkr(String nameUkr) {
+        this.nameUkr = nameUkr;
     }
 
     public String getPassword() { return password; }

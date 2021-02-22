@@ -9,6 +9,4 @@ import java.util.List;
  */
 public interface UserTariffsService {
     List<UserTariff> setUserTariffs(Long userId, Long tariffId, String service, double price);
-    List<UserTariff> updateTariff(UserTariff userTariff);
-    List<UserTariff> deleteTariff();
 }

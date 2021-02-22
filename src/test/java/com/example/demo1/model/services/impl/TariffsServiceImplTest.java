@@ -1,7 +1,7 @@
 package com.example.demo1.model.services.impl;
 
-import com.example.demo1.model.dto.TariffDto;
-import com.example.demo1.model.entities.Tariff;
+import com.mieshkov.corplan.model.entities.Tariff;
+import com.mieshkov.corplan.model.services.impl.TariffsServiceImpl;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -10,11 +10,10 @@ import setup.DbSetupTest;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * @author Ivan Mieshkov
  */
+
 public class TariffsServiceImplTest {
     TariffsServiceImpl tariffsService = new TariffsServiceImpl();
 
@@ -29,15 +28,29 @@ public class TariffsServiceImplTest {
     }
 
     @Test
-    public void getAllTariffs() {
-        List<TariffDto> tariffs = tariffsService.getAllTariffs("en_EN");
-        Assert.assertEquals(3, tariffs.size());
+    public void getByTariffId() {
+        Tariff tariff = tariffsService.getByTariffId(2L);
+        Assert.assertEquals("tv", tariff.getService());
     }
 
     @Test
-    public void getByService() {
-        List<TariffDto> tariffs = tariffsService.getByService("internet", "en_EN");
+    public void getAllByService() {
+        List<Tariff> tariffs = tariffsService.getAllByService("internet");
         Assert.assertEquals(1, tariffs.size());
+    }
+
+    @Test
+    public void tariffCreate() {
+        tariffsService.tariffCreate("Новий", "New Tariff", 140.99, "tv");
+        Tariff tariff = tariffsService.getByTariffId(4L);
+        Assert.assertEquals("New Tariff", tariff.getNameEn());
+    }
+
+    @Test
+    public void delete() {
+        tariffsService.delete(2L);
+        List<Tariff> tariffs = tariffsService.findAll();
+        Assert.assertEquals(2, tariffs.size());
     }
 
 }

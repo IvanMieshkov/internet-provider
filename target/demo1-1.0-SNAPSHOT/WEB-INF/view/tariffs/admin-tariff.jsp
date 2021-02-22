@@ -38,8 +38,6 @@
         <img src="https://i.ibb.co/nR7vNFX/pngwing-com.png" width="100" height="50" alt="logo"></a>
     <a href="${pageContext.request.contextPath}/main/menu" class="navbar-brand letter"
        style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.client.menu"/></a>
-<%--    <a href="${pageContext.request.contextPath}/main/clients" class="navbar-brand letter"--%>
-<%--       style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.clients"/></a>--%>
     <a href="${pageContext.request.contextPath}/main/tariffs?service=internet" class="navbar-brand letter"
        style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.internet"/></a>
     <a href="${pageContext.request.contextPath}/main/tariffs?service=tv" class="navbar-brand letter"
@@ -58,48 +56,124 @@
         </select>
     </form>
 </nav>
-<br>
 
-<table class="table" style="color: dodgerblue">
-    <tbody>
-    <tr>
-        <th>
-            <fmt:message key="title.tariff.name"/>
-            <a href="${pageContext.request.contextPath}/main/tariffs?service=${requestScope.service}&sortBy=${language == 'ukr' ? 'tariff_name_ukr' : 'tariff_name_en'}&order=ASC">&#8593</a>
-            <a href="${pageContext.request.contextPath}/main/tariffs?service=${requestScope.service}&sortBy=${language == 'ukr' ? 'tariff_name_ukr' : 'tariff_name_en'}&order=DESC">&#8595</a>
-        </th>
-        <th><fmt:message key="title.tariff.price"/>
-            <a href="${pageContext.request.contextPath}/main/tariffs?service=${requestScope.service}&sortBy=tariff_price&order=ASC">&#8593</a>
-            <a href="${pageContext.request.contextPath}/main/tariffs?service=${requestScope.service}&sortBy=tariff_price&order=DESC">&#8595</a>
-        </th>
+<div class="row">
+    <div class="container">
+        <div class="mt-3">
+            <ul class="pagination">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><fmt:message key="tariff.items_per_page"/></a>
+                </li>
 
-        <c:forEach var="tariff" items="${requestScope.tariffs}">
-    <tr>
-        <td><c:out value="${tariff.name}"/></td>
-        <td><c:out value="${tariff.tariff.tariffPrice}"/> <fmt:message key="currency"/> </td>
-        <td>
-            <form method="get" action="${pageContext.request.contextPath}/main/tariff-edit-form">
-                <input type="hidden" name="id" value="${tariff.tariff.id}"/>
-                <p>
-                    <button class="btn btn-success" style="background-color: deepskyblue" type="submit">
-                        <fmt:message key="button.edit.tariff"/>
-                    </button>
-                </p>
-            </form>
-            </p>
-        </td>
-    </tr>
-    </c:forEach>
-    </tbody>
-</table><br>
+                <c:forEach var="ar" items="${itemsPerPageArray}">
+                    <c:choose>
+                        <c:when test="${itemsPerPage eq ar}">
+                            <li class="page-item active">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">${ar}</a>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item">
+                                <a class="page-link"
+                                   href="${pageContext.request.contextPath}/main/tariffs?service=${requestScope.service}&page=${currentPage}&itemsPerPage=${ar}&sortBy=${language == 'ukr' ? 'name_ukr' : 'name_en'}&order=ASC"
+                                   tabindex="-1"
+                                   aria-disabled="true">${ar}</a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+            </ul>
+        </div>
+        <br>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>
+                    <fmt:message key="title.tariff.name"/>
+                    <a href="${pageContext.request.contextPath}/main/tariffs?service=${requestScope.service}&page=${currentPage}&itemsPerPage=${itemsPerPage}&sortBy=${language == 'ukr' ? 'name_ukr' : 'name_en'}&order=ASC">&#8593</a>
+                    <a href="${pageContext.request.contextPath}/main/tariffs?service=${requestScope.service}&page=${currentPage}&itemsPerPage=${itemsPerPage}&sortBy=${language == 'ukr' ? 'name_ukr' : 'name_en'}&order=DESC">&#8595</a>
+                </th>
+                <th><fmt:message key="title.tariff.price"/>
+                    <a href="${pageContext.request.contextPath}/main/tariffs?service=${requestScope.service}&page=${currentPage}&itemsPerPage=${itemsPerPage}&sortBy=price&order=ASC">&#8593</a>
+                    <a href="${pageContext.request.contextPath}/main/tariffs?service=${requestScope.service}&page=${currentPage}&itemsPerPage=${itemsPerPage}&sortBy=price&order=DESC">&#8595</a>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="tariff" items="${tariffs}">
+                <jsp:useBean id="tariff" type="com.mieshkov.corplan.model.entities.Tariff"/>
 
-<form method="get" action="${pageContext.request.contextPath}/main/tariff-edit-form">
-    <p align="center" style="color: deepskyblue">
-        <button class="btn btn-success" style="background-color: deepskyblue" type="submit">
-            <fmt:message key="button.add.tariff"/>
-        </button>
-    </p>
-</form>
+                <tr>
+                    <td>
+                        <c:choose>
+                            <c:when test="${sessionScope.language eq 'en'}">
+                                ${tariff.nameEn}
+                            </c:when>
+                            <c:otherwise>
+                                ${tariff.nameUkr}
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                    <td><c:out value="${tariff.price}"/> <fmt:message key="currency"/> </td>
+                    <td>
+                        <form method="get" action="${pageContext.request.contextPath}/main/tariff-edit-form">
+                            <input type="hidden" name="id" value="${tariff.id}"/>
+                            <button class="btn btn-success" style="background-color: deepskyblue" type="submit">
+                                <fmt:message key="button.edit.tariff"/>
+                            </button>
+                        </form>
+                        </p>
+                    </td>
+                    <td>
+                        <form method="get" action="${pageContext.request.contextPath}/main/tariffs">
+                            <input type="hidden" name="id" value="${tariff.id}"/>
+                            <input type="hidden" name="service" value="${tariff.service}"/>
+                            <input type="hidden" name="type" value="delete"/>
+                            <button class="btn btn-success" style="background-color: deepskyblue" type="submit">
+                                <fmt:message key="button.delete.tariff"/>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+        <div class="mt-3">
+            <ul class="pagination ">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><fmt:message key="tariff.page"/></a>
+                </li>
+                <c:forEach begin="1" end="${noOfPages}" var="i">
+                    <c:choose>
+                        <c:when test="${currentPage eq i}">
+                            <li class="page-item disabled">
+                                <a class="page-link"
+                                   href="#">${i}</a>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item">
+                                <a class="page-link"
+                                   href="${pageContext.request.contextPath}/main/tariffs?service=${requestScope.service}&page=${i}&itemsPerPage=${itemsPerPage}&sortBy=${sortBy}&order=${order}">${i}</a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div>
+    <form method="get" action="${pageContext.request.contextPath}/main/tariff-edit-form">
+        <p align="center" style="color: deepskyblue">
+            <button class="btn btn-success" style="background-color: deepskyblue" type="submit">
+                <fmt:message key="button.add.tariff"/>
+            </button>
+        </p>
+    </form>
+</div>
+
 
 </body>
 </html>

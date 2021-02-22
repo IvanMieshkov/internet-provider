@@ -9,7 +9,7 @@ import java.util.Arrays;
  * @author Ivan Mieshkov
  */
 public class ChangePassword implements Command {
-    private String[] hadAccess = {StringContainer.CLIENT_ROLE};
+    private final String[] hadAccess = {StringContainer.CLIENT_ROLE};
 
     @Override
     public String execute(HttpServletRequest req) {

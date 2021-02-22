@@ -14,7 +14,12 @@ import static com.mieshkov.corplan.containers.StringContainer.*;
  * @author Ivan Mieshkov
  */
 public class ChangePasswordCommit implements Command {
-    private String[] hadAccess = {CLIENT_ROLE};
+    private final String[] hadAccess = {CLIENT_ROLE};
+    private final UserServiceImpl userService;
+
+    public ChangePasswordCommit(UserServiceImpl userService) {
+        this.userService = userService;
+    }
 
     /**
      * Method, that receives current password and new password and sends them
@@ -27,7 +32,7 @@ public class ChangePasswordCommit implements Command {
         User user = (User) req.getSession().getAttribute(USER_LOGGED);
 
         try {
-            new UserServiceImpl().updatePassword(user,
+            userService.updatePassword(user,
                     req.getParameter("current-password"),
                     req.getParameter("new-password"));
 

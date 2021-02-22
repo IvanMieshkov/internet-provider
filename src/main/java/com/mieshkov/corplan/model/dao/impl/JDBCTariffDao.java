@@ -3,6 +3,7 @@ package com.mieshkov.corplan.model.dao.impl;
 import com.mieshkov.corplan.model.dao.TariffDao;
 import com.mieshkov.corplan.model.dao.mapper.TariffMapper;
 import com.mieshkov.corplan.model.entities.Tariff;
+import com.mieshkov.corplan.utils.TariffPage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,9 +18,9 @@ import static com.mieshkov.corplan.containers.QueryContainer.*;
  * @author Ivan Mieshkov
  */
 public class JDBCTariffDao implements TariffDao {
-    private Connection connection;
-    private TariffMapper tariffMapper = new TariffMapper();
-    private List<Tariff> tariffs = new ArrayList<>();
+    private final Connection connection;
+    private final TariffMapper tariffMapper = new TariffMapper();
+    private final List<Tariff> tariffs = new ArrayList<>();
 
     JDBCTariffDao(Connection connection) {
         this.connection = connection;
@@ -32,10 +33,10 @@ public class JDBCTariffDao implements TariffDao {
     @Override
     public void create(Tariff entity) {
         try(PreparedStatement statement = connection.prepareStatement(CREATE_TARIFF)) {
-            statement.setString(1, entity.getTariffNameUkr());
-            statement.setString(2, entity.getTariffNameEn());
-            statement.setDouble(3, entity.getTariffPrice());
-            statement.setString(4, entity.getTariffService());
+            statement.setString(1, entity.getNameUkr());
+            statement.setString(2, entity.getNameEn());
+            statement.setDouble(3, entity.getPrice());
+            statement.setString(4, entity.getService());
 
             statement.execute();
         } catch (SQLException e) {
@@ -49,9 +50,9 @@ public class JDBCTariffDao implements TariffDao {
      * @return tariff found entity
      */
     @Override
-    public Tariff findById(int id) {
+    public Tariff findById(Long id) {
         try(PreparedStatement statement = connection.prepareStatement(FIND_TARIFF_BY_ID)) {
-            statement.setInt(1, id);
+            statement.setLong(1, id);
             ResultSet rs = statement.executeQuery();
             Tariff tariff = null;
 
@@ -81,10 +82,37 @@ public class JDBCTariffDao implements TariffDao {
         }
     }
 
-    public List<Tariff> findByServiceSorted(String tariffService, String language, String sortBy, String order) {
-        String query = "SELECT * FROM tariff WHERE tariff_service = ? ORDER BY " + sortBy + " " + order + ";";
+    public TariffPage findByServiceSorted(String tariffService, String sortBy, String order,
+                                          int page, int itemsPerPage) {
+        List<Tariff> tariffs = new ArrayList<>();
+        int count = 0;
+        int fromItem = (page -1) * itemsPerPage;
+        int toItem = ((page - 1) * itemsPerPage) + itemsPerPage;
+
+        String query = "SELECT * ,(SELECT count(*) FROM tariff WHERE service = ?) AS count FROM tariff  WHERE service = ? ORDER BY " +
+                        sortBy + " " + order + " LIMIT " + fromItem + " ," + toItem + ";";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, tariffService);
+            statement.setString(2, tariffService);
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Tariff tariff = tariffMapper.extractFromResultSet(rs);
+                count = rs.getInt("count");
+                tariffs.add(tariff);
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new TariffPage(count, tariffs);
+    }
+
+    @Override
+    public List<Tariff> findAllByService(String service) {
+        try (PreparedStatement statement = connection.prepareStatement(FIND_TARIFFS_BY_SERVICE)) {
+            statement.setString(1, service);
             return finder(statement);
 
         } catch (SQLException e) {
@@ -94,9 +122,9 @@ public class JDBCTariffDao implements TariffDao {
     }
 
     @Override
-    public List<Tariff> findByUserId(Integer id) {
+    public List<Tariff> findByUserId(Long id) {
         try (PreparedStatement statement = connection.prepareStatement(FIND_USER_TARIFFS)) {
-            statement.setInt(1, id);
+            statement.setLong(1, id);
             return finder(statement);
 
         } catch (SQLException e) {
@@ -112,10 +140,10 @@ public class JDBCTariffDao implements TariffDao {
     @Override
     public void update(Tariff entity) {
         try (PreparedStatement statement = connection.prepareStatement(UPDATE_TARIFF)) {
-            statement.setString(1, entity.getTariffNameEn());
-            statement.setString(2, entity.getTariffNameUkr());
-            statement.setDouble(3, entity.getTariffPrice());
-            statement.setString(4, entity.getTariffService());
+            statement.setString(1, entity.getNameEn());
+            statement.setString(2, entity.getNameUkr());
+            statement.setDouble(3, entity.getPrice());
+            statement.setString(4, entity.getService());
             statement.setLong(5, entity.getId());
 
             statement.execute();
@@ -129,9 +157,9 @@ public class JDBCTariffDao implements TariffDao {
      * @param id
      */
     @Override
-    public void delete(int id) {
+    public void delete(Long id) {
         try (PreparedStatement statement = connection.prepareStatement(DELETE_TARIFF)) {
-            statement.setInt(1, id);
+            statement.setLong(1, id);
 
             statement.execute();
         } catch (SQLException e) {

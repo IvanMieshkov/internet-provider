@@ -61,16 +61,16 @@
 
     <tr>
         <th scope="row"><fmt:message key="field.user.login"/></th>
-        <td align="right">${sessionScope.user.login}</td>
+        <td align="right">${sessionScope.user.id}</td>
     </tr>
     <tr>
         <th scope="row"><fmt:message key="field.user.name"/></th>
         <c:choose>
             <c:when test="${language == 'en'}">
-                <td align="right">${sessionScope.user.fullNameEn}</td>
+                <td align="right">${sessionScope.user.nameEn}</td>
             </c:when>
             <c:otherwise>
-                <td align="right">${sessionScope.user.fullNameUkr}</td>
+                <td align="right">${sessionScope.user.nameUkr}</td>
             </c:otherwise>
         </c:choose>
     </tr>
@@ -90,11 +90,14 @@
         <th scope="row"><fmt:message key="field.user.balance"/></th>
         <c:choose>
             <c:when test="${sessionScope.user.balance<0}">
-                <td align="right" scope="row" style="color: red">${sessionScope.user.balance}
+                <td align="right" scope="row" style="color: red">
+                    <fmt:formatNumber type="number" maxFractionDigits="2" value="${sessionScope.user.balance}" />
                     <fmt:message key="currency"/>
                     <fmt:message key="field.user.blocked"/></td>
             </c:when>
-            <c:otherwise><td align="right">${sessionScope.user.balance} <fmt:message key="currency"/></td></c:otherwise>
+            <c:otherwise><td align="right">
+                <fmt:formatNumber type="number" maxFractionDigits="2" value="${sessionScope.user.balance}" />
+                <fmt:message key="currency"/></td></c:otherwise>
         </c:choose>
     </tr>
     </tbody>
@@ -105,21 +108,23 @@
         <input type="text" name="payment" required placeholder="<fmt:message key="field.user.payment"/>"/>
         <button class="btn btn-success" style="background-color: deepskyblue" type="submit"><fmt:message key="field.user.pay"/></button>
     </p>
-     <c:if test="${not empty requestScope.warning}">
+    <c:if test="${not empty requestScope.warning}">
         <fmt:message key="${requestScope.warning}"/>
     </c:if><br>
 </form>
-
+<c:if test="${not empty requestScope.warning}">
+    <fmt:message key="${requestScope.warning}"/>
+</c:if>
 
 <p align="center" style="color: deepskyblue"><fmt:message key="field.user.tariffs"/></p>
 <table class="table" style="color: deepskyblue" >
     <tbody>
     <c:forEach var="userTariff" items="${sessionScope.userTariffs}">
         <tr>
-            <c:if test="${userTariff.tariff.tariffService=='internet'}"><th><fmt:message key="navbar.internet"/></th></c:if>
-            <c:if test="${userTariff.tariff.tariffService=='tv'}"><th><fmt:message key="navbar.tv"/></th></c:if>
-            <c:if test="${userTariff.tariff.tariffService=='telephony'}"><th><fmt:message key="navbar.telephony"/></th></c:if>
-            <td align="right"><c:out value="${language == 'en' ? userTariff.tariff.tariffNameEn : userTariff.tariff.tariffNameUkr}"/></td>
+            <c:if test="${userTariff.service=='internet'}"><th><fmt:message key="navbar.internet"/></th></c:if>
+            <c:if test="${userTariff.service=='tv'}"><th><fmt:message key="navbar.tv"/></th></c:if>
+            <c:if test="${userTariff.service=='telephony'}"><th><fmt:message key="navbar.telephony"/></th></c:if>
+            <td align="right"><c:out value="${language == 'en' ? userTariff.tariff.nameEn : userTariff.tariff.nameUkr}"/></td>
         </tr>
     </c:forEach>
     </tbody>

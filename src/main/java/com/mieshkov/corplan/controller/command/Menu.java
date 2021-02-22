@@ -6,20 +6,27 @@ import com.mieshkov.corplan.model.services.impl.UserServiceImpl;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
-import static com.mieshkov.corplan.containers.StringContainer.*;
+import static com.mieshkov.corplan.containers.StringContainer.ADMIN_MENU;
+import static com.mieshkov.corplan.containers.StringContainer.CLIENT_MENU;
 
 /**
  * @author Ivan Mieshkov
  */
 public class Menu implements Command {
-    private String[] hasAccess = {StringContainer.CLIENT_ROLE, StringContainer.ADMIN_ROLE};
+    private final String[] hasAccess = {StringContainer.CLIENT_ROLE, StringContainer.ADMIN_ROLE};
+    private final UserServiceImpl userService;
+
+    public Menu(UserServiceImpl userService) {
+        this.userService = userService;
+    }
+
 
     @Override
     public String execute(HttpServletRequest req) {
         String role = (String) req.getSession().getAttribute(StringContainer.USER_LOGGED_ROLE);
 
         if(role.equals(StringContainer.ADMIN_ROLE)) {
-            req.setAttribute(StringContainer.USERS_LIST, new UserServiceImpl().showAllUsers());
+            req.setAttribute(StringContainer.USERS_LIST, userService.showAllUsers());
             return ADMIN_MENU;
         } else {
             return CLIENT_MENU;

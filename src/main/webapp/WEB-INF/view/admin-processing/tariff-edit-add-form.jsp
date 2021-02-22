@@ -38,8 +38,6 @@
         <img src="https://i.ibb.co/nR7vNFX/pngwing-com.png" width="100" height="50" alt="logo"></a>
     <a href="${pageContext.request.contextPath}/main/menu" class="navbar-brand letter"
        style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.client.menu"/></a>
-<%--    <a href="${pageContext.request.contextPath}/main/clients" class="navbar-brand letter"--%>
-<%--       style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.clients"/></a>--%>
     <a href="${pageContext.request.contextPath}/main/tariffs?service=internet" class="navbar-brand letter"
        style="color: ghostwhite; font-size:14pt" ><fmt:message key="navbar.internet"/></a>
     <a href="${pageContext.request.contextPath}/main/tariffs?service=tv" class="navbar-brand letter"
@@ -73,13 +71,13 @@
     </p><br>
     <c:choose>
         <c:when test="${requestScope.tariff != null}">
-            <form method="post" action="${pageContext.request.contextPath}/tariff-edit">
+            <form method="post" action="${pageContext.request.contextPath}/tariffs?type=edit">
                 <p align="center">
                     <input type="hidden" name="id" value="${requestScope.tariff.id}"/>
-                    <input type="text" placeholder="${requestScope.tariff.tariffNameUkr}" name="nameUkr"><br><br>
-                    <input type="text" placeholder="${requestScope.tariff.tariffNameEn}" name="nameEn"><br><br>
-                    <input type="text" placeholder="${requestScope.tariff.tariffPrice}" name="price"><br><br>
-                    <input type="text" placeholder="${requestScope.tariff.tariffService}" name="service"><br><br>
+                    <input type="text" placeholder="${requestScope.tariff.nameUkr}" name="nameUkr"><br><br>
+                    <input type="text" placeholder="${requestScope.tariff.nameEn}" name="nameEn"><br><br>
+                    <input type="text" placeholder="${requestScope.tariff.price}" name="price"><br><br>
+                    <input type="text" placeholder="${requestScope.tariff.service}" name="service"><br><br>
                     <c:if test="${not empty requestScope.warning}">
                         <fmt:message key="${requestScope.warning}"/>
                     </c:if><br>
@@ -88,12 +86,13 @@
             </form>
         </c:when>
         <c:otherwise>
-            <form method="post" action="${pageContext.request.contextPath}/tariff-add">
+            <form method="post" action="${pageContext.request.contextPath}/tariffs">
                 <p align="center">
                     <input type="text" required placeholder="<fmt:message key="field.tariff.name.ukr"/>" name="nameUkr"><br><br>
                     <input type="text" required placeholder="<fmt:message key="field.tariff.name.en"/>" name="nameEn"><br><br>
                     <input type="text" required placeholder="<fmt:message key="field.tariff.price"/>" name="price"><br><br>
                     <input type="text" required placeholder="<fmt:message key="field.tariff.service"/>" name="service"><br><br>
+                    <input type="hidden" name="type" value="create"/>
                     <c:if test="${not empty requestScope.warning}">
                         <fmt:message key="${requestScope.warning}"/>
                     </c:if><br>

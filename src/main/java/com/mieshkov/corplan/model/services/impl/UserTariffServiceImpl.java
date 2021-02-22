@@ -6,24 +6,19 @@ import com.mieshkov.corplan.model.dao.UserTariffDao;
 import com.mieshkov.corplan.model.entities.UserTariff;
 import com.mieshkov.corplan.model.services.UserTariffsService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Ivan Mieshkov
  */
 public class UserTariffServiceImpl implements UserTariffsService {
-    private UserTariffDao userTariffDao = DaoFactory.getInstance().createUserTariffDao();
-    private UserDao userDao = DaoFactory.getInstance().createUserDao();
-    private List<UserTariff> tariffs = new ArrayList<>();
-    private List<UserTariff> updatedTariffs = new ArrayList<>();
-
-
+    private final UserTariffDao userTariffDao = DaoFactory.getInstance().createUserTariffDao();
+    private final UserDao userDao = DaoFactory.getInstance().createUserDao();
 
     @Override
     public List<UserTariff> setUserTariffs(Long userId, Long tariffId, String service, double price) {
         UserTariff userTariff = new UserTariff(userId,tariffId, service);
-        tariffs = userTariffDao.findTariffsByUserIdAndService(userId, service);
+        List<UserTariff> tariffs = userTariffDao.findTariffsByUserIdAndService(userId, service);
         if(tariffs.size() == 0) {
             userTariffDao.create(userTariff);
         } else {
@@ -31,23 +26,6 @@ public class UserTariffServiceImpl implements UserTariffsService {
             tariffs.clear();
         }
         userDao.updateUserBalance(userId, -price);
-        userDao.close();
-        tariffs = userTariffDao.findTariffsByUserId(userId);
-
-        userTariffDao.close();
-        return tariffs;
-    }
-
-    @Override
-    public List<UserTariff> updateTariff(UserTariff userTariff) {
-        userTariffDao.update(userTariff);
-        userTariffDao.close();
-        return null;
-    }
-
-    @Override
-    public List<UserTariff> deleteTariff() {
-        userTariffDao.close();
-        return null;
+        return userTariffDao.findTariffsByUserId(userId);
     }
 }

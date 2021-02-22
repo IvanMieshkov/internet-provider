@@ -1,6 +1,8 @@
 package com.example.demo1.model.services.impl;
 
-import com.example.demo1.model.entities.User;
+import com.mieshkov.corplan.model.entities.User;
+import com.mieshkov.corplan.model.exceptions.EmailAlreadyExistsException;
+import com.mieshkov.corplan.model.services.impl.UserServiceImpl;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -30,25 +32,30 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void findByLogin() {
-        User user = userService.findByLogin("000002");
-        Assert.assertEquals("user", user.getFullNameEn());
+    public void registerUser() {
+        User user = new User();
+        user.setNameEn("New User");
+        user.setNameUkr("Новий Користувач");
+        user.setPassword("123456");
+        user.setEmail("newUser@gmail.com");
+        user.setAddress("some address");
+        user.setPhoneNumber("+380502357896");
+        user.setRole("CLIENT");
+
+        try {
+            userService.registerUser(user);
+        } catch (EmailAlreadyExistsException e) {
+            e.printStackTrace();
+        }
+        user = userService.findById(100003L);
+
+        Assert.assertEquals("+380502357896", user.getPhoneNumber());
     }
 
-//    @Test
-//    public void registerUser() {
-//        User user = new User();
-//        user.setLogin("123456");
-//        user.setFullNameEn("New User");
-//        user.setFullNameUkr("Новий Користувач");
-//        user.setPassword("123456");
-//        user.setEmail("newUser@gmail.com");
-//        user.setAddress("some address");
-//        user.setPhoneNumber("+380502357896");
-//        user.setRole("CLIENT");
-//
-//        userService.registerUser(user);
-//
-//    }
+    @Test
+    public void updateActive() {
+        userService.updateActive(100002L, false);
+        Assert.assertEquals(false, userService.findById(100002L).getActive());
+    }
 
 }

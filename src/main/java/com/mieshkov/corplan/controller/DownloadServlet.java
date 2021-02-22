@@ -1,7 +1,7 @@
 package com.mieshkov.corplan.controller;
 
 import com.mieshkov.corplan.containers.StringContainer;
-import com.mieshkov.corplan.model.dto.TariffDto;
+import com.mieshkov.corplan.model.entities.Tariff;
 import com.mieshkov.corplan.model.services.GeneratePdf;
 import com.mieshkov.corplan.model.services.impl.TariffsServiceImpl;
 
@@ -20,7 +20,6 @@ public class DownloadServlet extends HttpServlet {
 
     private static final int BYTES_DOWNLOAD = 1024;
 
-
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response) throws IOException {
         String language = (String) request.getSession().getAttribute(StringContainer.LANGUAGE);
@@ -32,7 +31,7 @@ public class DownloadServlet extends HttpServlet {
         response.addHeader("Content-Disposition", "inline; filename=" + "tariffs.pdf");
         ServletOutputStream out = response.getOutputStream();
 
-        List<TariffDto> tariffs = new TariffsServiceImpl().getByService(service, language, sortBy, order);
+        List<Tariff> tariffs = new TariffsServiceImpl().getAllByService(service);
 
         ByteArrayOutputStream baos = GeneratePdf.getPdfFile(tariffs, language);
         baos.writeTo(out);

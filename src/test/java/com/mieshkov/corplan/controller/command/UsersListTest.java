@@ -8,11 +8,10 @@ import org.junit.Test;
 import setup.DbSetupTest;
 
 import javax.servlet.http.HttpServletRequest;
-import static org.mockito.Mockito.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 /**
  * @author Ivan Mieshkov

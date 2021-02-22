@@ -1,39 +1,32 @@
-package com.mieshkov.corplan.model.services.impl;
+//package com.mieshkov.corplan.model.services.impl;
 
-import com.mieshkov.corplan.model.entities.User;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import setup.DbSetupTest;
+//public class UserServiceImplTest {
+//
+//    UserServiceImpl userService = new UserServiceImpl();
+//
+//    @Before
+//    public void setUp() {
+//        DbSetupTest.setUpDataBase();
+//    }
+//
+//    @After
+//    public void tearDown() {
+//        DbSetupTest.tearDownDataBase();
+//    }
+//
+//    @Test
+//    public void showAllUsers() {
+//        List<User> users = userService.showAllUsers();
+//        Assert.assertEquals(2, users.size());
+//    }
+//    __________________________________
 
-import java.util.List;
-
-public class UserServiceImplTest {
-
-    UserServiceImpl userService = new UserServiceImpl();
-
-    @Before
-    public void setUp() {
-        DbSetupTest.setUpDataBase();
-    }
-
-    @After
-    public void tearDown() {
-        DbSetupTest.tearDownDataBase();
-    }
-
-    @Test
-    public void showAllUsers() {
-        List<User> users = userService.showAllUsers();
-        Assert.assertEquals(2, users.size());
-    }
-
-    @Test
-    public void findByLogin() {
-        User user = userService.findByLogin("000002");
-        Assert.assertEquals("user", user.getFullNameEn());
-    }
+    //deprecated(заменил поиск по логину на поиск по ид
+//    @Test
+//    public void findByLogin() {
+//        User user = userService.findByLogin("000002");
+//        Assert.assertEquals("user", user.getFullNameEn());
+//    }
 
 //    @Test
 //    public void registerUser() {
@@ -51,4 +44,4 @@ public class UserServiceImplTest {
 //
 //    }
 
-}
+//}
