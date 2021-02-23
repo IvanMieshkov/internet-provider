@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="233.0" y="0.0">com.mieshkov.corplan.model.dao.mapper.UserMapper</node>
+    <node x="533.0" y="214.0">com.mieshkov.corplan.model.dao.DaoFactory</node>
+    <node x="364.0" y="472.0">com.mieshkov.corplan.model.dao.impl.JDBCDaoFactory</node>
+    <node x="228.0" y="126.0">com.mieshkov.corplan.model.dao.impl.JDBCUserDao</node>
+    <node x="0.0" y="247.0">com.mieshkov.corplan.model.dao.impl.ConnectionPoolHolder</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.mieshkov.corplan.model.dao.impl.JDBCDaoFactory" target="com.mieshkov.corplan.model.dao.impl.ConnectionPoolHolder">
+      <point x="-87.75" y="-60.0" />
+      <point x="393.25" y="452.0" />
+      <point x="104.0" y="452.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.mieshkov.corplan.model.dao.impl.JDBCDaoFactory" target="com.mieshkov.corplan.model.dao.DaoFactory">
+      <point x="29.25" y="-60.0" />
+      <point x="510.25" y="442.0" />
+      <point x="591.5" y="442.0" />
+      <point x="-58.5" y="60.0" />
+    </edge>
+    <edge source="com.mieshkov.corplan.model.dao.impl.JDBCDaoFactory" target="com.mieshkov.corplan.model.dao.impl.JDBCUserDao">
+      <point x="-29.25" y="-60.0" />
+      <point x="451.75" y="442.0" />
+      <point x="370.5" y="442.0" />
+      <point x="0.0" y="148.0" />
+    </edge>
+    <edge source="com.mieshkov.corplan.model.dao.DaoFactory" target="com.mieshkov.corplan.model.dao.impl.JDBCDaoFactory">
+      <point x="58.5" y="60.0" />
+      <point x="708.5" y="452.0" />
+      <point x="568.75" y="452.0" />
+      <point x="87.75" y="-60.0" />
+    </edge>
+    <edge source="com.mieshkov.corplan.model.dao.impl.JDBCUserDao" target="com.mieshkov.corplan.model.dao.mapper.UserMapper">
+      <point x="-71.25" y="-148.0" />
+      <point x="299.25" y="101.0" />
+      <point x="301.75" y="101.0" />
+      <point x="-68.75" y="38.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.9999999999999994" x="321.01443001442976" y="463.292207792208" />
+  <SelectedNodes>
+    <node>com.mieshkov.corplan.model.dao.mapper.UserMapper</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

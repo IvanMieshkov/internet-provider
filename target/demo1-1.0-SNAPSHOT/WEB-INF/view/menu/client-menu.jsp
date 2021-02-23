@@ -112,9 +112,6 @@
         <fmt:message key="${requestScope.warning}"/>
     </c:if><br>
 </form>
-<c:if test="${not empty requestScope.warning}">
-    <fmt:message key="${requestScope.warning}"/>
-</c:if>
 
 <p align="center" style="color: deepskyblue"><fmt:message key="field.user.tariffs"/></p>
 <table class="table" style="color: deepskyblue" >
