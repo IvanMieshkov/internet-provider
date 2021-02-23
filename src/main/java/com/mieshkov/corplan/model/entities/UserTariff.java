@@ -10,6 +10,15 @@ public class UserTariff {
     private String service;
     private Tariff tariff;
 
+    public UserTariff() {
+    }
+
+    public UserTariff(Long userId, Long tariffId, String service) {
+        this.userId = userId;
+        this.tariffId = tariffId;
+        this.service = service;
+    }
+
     public Tariff getTariff() {
         return tariff;
     }
@@ -28,26 +37,12 @@ public class UserTariff {
 
     private User user;
 
-    public UserTariff(Long userId, Long tariffId, String service) {
-        this.userId = userId;
-        this.tariffId = tariffId;
-        this.service = service;
-    }
-
     public String getService() {
         return service;
     }
 
     public void setService(String service) {
         this.service = service;
-    }
-
-    public UserTariff(Long id, Long userId, Long tariffId, String service, Tariff tariff) {
-        this.id = id;
-        this.userId = userId;
-        this.tariffId = tariffId;
-        this.service = service;
-        this.tariff = tariff;
     }
 
     public Long getId() {

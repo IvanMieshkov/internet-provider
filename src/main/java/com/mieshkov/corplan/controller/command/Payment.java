@@ -7,8 +7,7 @@ import com.mieshkov.corplan.model.services.impl.UserServiceImpl;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
-import static com.mieshkov.corplan.containers.StringContainer.CLIENT_MENU;
-import static com.mieshkov.corplan.containers.StringContainer.PAYMENT_INCORRECT;
+import static com.mieshkov.corplan.containers.StringContainer.*;
 
 /**
  * @author Ivan Mieshkov

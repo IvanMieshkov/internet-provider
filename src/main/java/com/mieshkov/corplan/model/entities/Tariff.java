@@ -10,21 +10,6 @@ public class Tariff {
     private Double price;
     private String service;
 
-    public Tariff(Long id, String nameUkr, String nameEn, Double price, String service) {
-        this.id = id;
-        this.nameUkr = nameUkr;
-        this.nameEn = nameEn;
-        this.price = price;
-        this.service = service;
-    }
-
-    public Tariff(String nameUkr, String nameEn, Double price, String service) {
-        this.nameUkr = nameUkr;
-        this.nameEn = nameEn;
-        this.price = price;
-        this.service = service;
-    }
-
     public Long getId() {
         return id;
     }

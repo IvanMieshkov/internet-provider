@@ -69,9 +69,9 @@ public class Tariffs implements Command {
         try {
             tariffPage = tariffsService.getByService(service, sortBy, order, currentPage, itemsPerPage);
         } catch (DbProcessingException e) {
-            LOG.error("Error occurred while updating faculty : {}", e.getMessage());
+            LOG.error("Error occurred while updating tariffs : {}", e.getMessage());
             req.setAttribute("errorMessage", e.getMessage());
-            return "/WEB-INF/jsp/errorPage.jsp";
+            return "/WEB-INF/view/errors/error.jsp";
         }
 
         int totalTariffs = tariffPage.getCount();
@@ -94,8 +94,12 @@ public class Tariffs implements Command {
     }
 
     public void create() {
-        Double tariffPrice = Double.parseDouble(price);
-        tariffsService.tariffCreate(nameUkr, nameEn, tariffPrice, service);
+        Tariff tariff = new Tariff();
+        tariff.setNameUkr(nameUkr);
+        tariff.setNameEn(nameEn);
+        tariff.setPrice(Double.parseDouble(price));
+        tariff.setService(service);
+        tariffsService.tariffCreate(tariff);
     }
 
     public void delete() {

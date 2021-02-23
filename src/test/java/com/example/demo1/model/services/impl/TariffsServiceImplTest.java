@@ -41,8 +41,13 @@ public class TariffsServiceImplTest {
 
     @Test
     public void tariffCreate() {
-        tariffsService.tariffCreate("Новий", "New Tariff", 140.99, "tv");
-        Tariff tariff = tariffsService.getByTariffId(4L);
+        Tariff tariff = new Tariff();
+        tariff.setNameUkr("Новий");
+        tariff.setNameEn("New Tariff");
+        tariff.setPrice(140.99);
+        tariff.setService("tv");
+        tariffsService.tariffCreate(tariff);
+        tariff = tariffsService.getByTariffId(4L);
         Assert.assertEquals("New Tariff", tariff.getNameEn());
     }
 

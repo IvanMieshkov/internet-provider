@@ -1,8 +1,10 @@
 package com.mieshkov.corplan.model.dao.mapper;
 
 import com.mieshkov.corplan.model.entities.Tariff;
+import com.mieshkov.corplan.model.entities.User;
 import com.mieshkov.corplan.model.entities.UserTariff;
 
+import java.nio.file.attribute.UserDefinedFileAttributeView;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
@@ -19,13 +21,15 @@ public class UserTariffMapper implements ObjectMapper<UserTariff> {
      */
     @Override
     public UserTariff extractFromResultSet(ResultSet rs) throws SQLException {
-        Long id = rs.getLong("id");
-        Long userId = rs.getLong("user_id");
-        Long tariffId = rs.getLong("tariff_id");
-        String service = rs.getString("service");
-        Tariff tariff = new TariffMapper().extractFromResultSet(rs);
 
-        return new UserTariff(id, userId, tariffId, service, tariff);
+        UserTariff userTariff = new UserTariff();
+        userTariff.setId(rs.getLong("id"));
+        userTariff.setUserId(rs.getLong("user_id"));
+        userTariff.setTariffId(rs.getLong("tariff_id"));
+        userTariff.setService(rs.getString("service"));
+        userTariff.setTariff(new TariffMapper().extractFromResultSet(rs));
+
+        return userTariff;
     }
 
     /**

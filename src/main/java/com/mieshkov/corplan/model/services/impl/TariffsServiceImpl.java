@@ -41,8 +41,8 @@ public class TariffsServiceImpl implements TariffsService {
     }
 
     @Override
-    public void tariffCreate(String nameUkr, String nameEn, Double price, String service) {
-        tariffDao.create(new Tariff(nameUkr, nameEn, price, service));
+    public void tariffCreate(Tariff tariff) {
+        tariffDao.create(tariff);
     }
 
     @Override

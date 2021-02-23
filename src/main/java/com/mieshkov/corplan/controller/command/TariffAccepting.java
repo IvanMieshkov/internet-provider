@@ -1,25 +1,19 @@
 package com.mieshkov.corplan.controller.command;
 
-import com.mieshkov.corplan.containers.StringContainer;
-import com.mieshkov.corplan.model.entities.Tariff;
 import com.mieshkov.corplan.model.entities.User;
-import com.mieshkov.corplan.model.services.impl.TariffsServiceImpl;
 import com.mieshkov.corplan.model.services.impl.UserServiceImpl;
 import com.mieshkov.corplan.model.services.impl.UserTariffServiceImpl;
-import com.mieshkov.corplan.utils.TariffPage;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
-import java.util.List;
 
-import static com.mieshkov.corplan.containers.StringContainer.CLIENT_MENU;
-import static com.mieshkov.corplan.containers.StringContainer.CLIENT_TARIFF;
+import static com.mieshkov.corplan.containers.StringContainer.*;
 
 /**
  * @author Ivan Mieshkov
  */
 public class TariffAccepting implements Command {
-    private final String[] hasAccess = {StringContainer.CLIENT_ROLE};
+    private final String[] hasAccess = {CLIENT_ROLE};
     private final UserServiceImpl userService;
     private final UserTariffServiceImpl userTariffService;
 
@@ -30,18 +24,26 @@ public class TariffAccepting implements Command {
 
     @Override
     public String execute(HttpServletRequest req) {
-        String service = req.getParameter(StringContainer.TARIFF_SERVICE);
-        User user = (User) req.getSession().getAttribute(StringContainer.USER_LOGGED);
-        Long tariffId = Long.parseLong(req.getParameter(StringContainer.TARIFF_ID));
+        String service = req.getParameter(TARIFF_SERVICE);
+        User user = (User) req.getSession().getAttribute(USER_LOGGED);
+        boolean active = userService.findById(user.getId()).getActive();
+        Long tariffId = Long.parseLong(req.getParameter(TARIFF_ID));
         Double price = Double.parseDouble(req.getParameter("price"));
         if(user.getBalance() < 0) {
-
-            req.setAttribute("warning", StringContainer.LOW_BALANCE);
-            req.getSession().setAttribute(StringContainer.USER_LOGGED, user);
-            req.getSession().setAttribute(StringContainer.USER_TARIFFS,
+            req.setAttribute("warning", LOW_BALANCE);
+            req.getSession().setAttribute(USER_LOGGED, user);
+            req.getSession().setAttribute(USER_TARIFFS,
                     userTariffService.setUserTariffs(user.getId(), tariffId, service, price));
             return CLIENT_MENU;
         }
+        if(!active) {
+            req.setAttribute("warning", BLOCKED);
+            req.getSession().setAttribute(USER_LOGGED, user);
+            req.getSession().setAttribute(USER_TARIFFS,
+                    userTariffService.setUserTariffs(user.getId(), tariffId, service, price));
+            return CLIENT_MENU;
+        }
+
 
         double balance = user.getBalance() - price;
         if(balance < 0) {
@@ -50,9 +52,9 @@ public class TariffAccepting implements Command {
         }
         user.setBalance(balance);
 
-        req.getSession().setAttribute(StringContainer.USER_TARIFFS,
+        req.getSession().setAttribute(USER_TARIFFS,
                                         userTariffService.setUserTariffs(user.getId(), tariffId, service, price));
-        req.getSession().setAttribute(StringContainer.USER_LOGGED, user);
+        req.getSession().setAttribute(USER_LOGGED, user);
         return CLIENT_MENU;
     }
 

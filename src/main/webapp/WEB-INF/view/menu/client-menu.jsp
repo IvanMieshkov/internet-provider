@@ -89,15 +89,28 @@
     <tr>
         <th scope="row"><fmt:message key="field.user.balance"/></th>
         <c:choose>
+            <c:when test="${sessionScope.user.balance>0 && requestScope.user.active}">
+                <td align="right">
+                    <fmt:formatNumber type="number" maxFractionDigits="2" value="${sessionScope.user.balance}" />
+                    <fmt:message key="currency"/>
+                </td>
+            </c:when>
             <c:when test="${sessionScope.user.balance<0}">
                 <td align="right" scope="row" style="color: red">
                     <fmt:formatNumber type="number" maxFractionDigits="2" value="${sessionScope.user.balance}" />
                     <fmt:message key="currency"/>
-                    <fmt:message key="field.user.blocked"/></td>
+                    <fmt:message key="field.user.blocked"/>
+                </td>
             </c:when>
-            <c:otherwise><td align="right">
-                <fmt:formatNumber type="number" maxFractionDigits="2" value="${sessionScope.user.balance}" />
-                <fmt:message key="currency"/></td></c:otherwise>
+            <c:otherwise>
+                <td align="right"><fmt:formatNumber type="number" maxFractionDigits="2" value="${sessionScope.user.balance}" />
+                        <fmt:message key="currency"/>
+                <td align="center" scope="row" style="color: red">
+                    <fmt:message key="field.user.blocked"/><br>
+                    <fmt:message key="warn.blocked"/>
+                </td>
+                </td>
+            </c:otherwise>
         </c:choose>
     </tr>
     </tbody>

@@ -35,6 +35,7 @@ public interface StringContainer {
     String PHONE_NUMBER_INCORRECT = "warn.incorrect.phone";
     String PAYMENT_INCORRECT = "warn.incorrect.payment";
     String LOW_BALANCE = "warn.low.balance";
+    String BLOCKED = "warn.blocked";
 
     String PAYMENT = "payment";
 

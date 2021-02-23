@@ -15,6 +15,6 @@ public interface TariffsService {
     List<Tariff> findAll();
     Tariff getByTariffId(Long id);
     void tariffEdit(Tariff tariff);
-    void tariffCreate(String nameUkr, String nameEn, Double price, String service);
+    void tariffCreate(Tariff tariff);
     void delete(Long id);
 }

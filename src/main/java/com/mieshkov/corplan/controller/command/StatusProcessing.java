@@ -1,15 +1,22 @@
 package com.mieshkov.corplan.controller.command;
 
 import com.mieshkov.corplan.containers.StringContainer;
+import com.mieshkov.corplan.model.entities.User;
+import com.mieshkov.corplan.model.exceptions.DbProcessingException;
 import com.mieshkov.corplan.model.services.impl.UserServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Ivan Mieshkov
  */
 public class StatusProcessing implements Command {
+    static final Logger LOG = LoggerFactory.getLogger(StatusProcessing.class);
+
     private final String[] hasAccess = {StringContainer.ADMIN_ROLE};
     private final UserServiceImpl userService;
 

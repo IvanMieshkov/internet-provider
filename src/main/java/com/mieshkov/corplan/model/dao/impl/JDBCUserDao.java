@@ -2,6 +2,7 @@ package com.mieshkov.corplan.model.dao.impl;
 
 import com.mieshkov.corplan.model.dao.UserDao;
 import com.mieshkov.corplan.model.dao.mapper.UserMapper;
+import com.mieshkov.corplan.model.entities.Tariff;
 import com.mieshkov.corplan.model.entities.User;
 
 import java.sql.Connection;
@@ -197,14 +198,15 @@ public class JDBCUserDao implements UserDao {
      */
     private List<User> findUsersList(PreparedStatement statement) throws SQLException {
         ResultSet resultSet = statement.executeQuery();
+        List<User> users = new ArrayList<>();
 
         while (resultSet.next()) {
             User user = userMapper.extractFromResultSet(resultSet);
-            userMapper.makeUnique(users, user);
+            users.add(user);
         }
         resultSet.close();
 
-        return new ArrayList<>(users.values());
+        return users;
     }
 }
 

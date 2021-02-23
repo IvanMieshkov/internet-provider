@@ -15,22 +15,7 @@ public class User {
     private String role;
     private boolean active;
 
-    public User() {
-    }
-
-    public User(Long id, String nameEn, String nameUkr, String password,
-                String email, String address, String phoneNumber, Double balance, String role, Boolean active) {
-        this.id = id;
-        this.nameEn = nameEn;
-        this.nameUkr = nameUkr;
-        this.password = password;
-        this.email = email;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.balance = balance;
-        this.role = role;
-        this.active = active;
-    }
+    public User() {}
 
     public User(String nameEn, String nameUkr, String password, String email, String address, String phoneNumber, String role) {
         this.nameEn = nameEn;
